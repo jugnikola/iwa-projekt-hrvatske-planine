@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    width: 60%;
+    margin: auto;
+    background-color: #DCE1E3;
+    font-family: Roboto, sans;
+    color: #333;
+}
+
+header {
+    background-color: aliceblue;
+    height: 200px;
+}
+
+nav {
+    list-style-type: none;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #3D5A80;
+}
+
+nav > a {
+    margin-left: 100px;
+    color: #fff;
+    text-decoration: none;
+}
+
+footer {
+    background-color: #293241;
+    color: #fff;
+    padding: 10px;
+	text-align: center;
+	line-height: 200%;
+	font-size: 20px;
+    /* position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    margin-top: 300px;
+
+}
+
+#img-autor {
+    float: left;
+    margin-left: 5em;
+    margin-right: 10em;
+}
+
+#tab-autor {
+    margin-top: 150px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+}
+
+.slika-planine-grid {
+    width: 370px;
+    height: 270px;
+}
+
+#galerija-filtracija {
+	
+}
+
+.slika-planine {
+    width: 800px;
+    position: relative;
+    left: 15%;
+}
+
+h1 {
+text-align: center;
+}
+
+.naslov-planina {
+    text-align: center;
+    font-size: 45px;
+}
