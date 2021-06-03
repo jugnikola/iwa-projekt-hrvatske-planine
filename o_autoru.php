@@ -1,14 +1,16 @@
+<?php 
+session_start();
+?>
+<!DOCTYPE html>
 <html lang="hr">
     <head>
-        <title>Hrvatske planine - O autoru</title>
+        <title>O autoru - Hrvatske planine</title>
         <meta charset="utf-8">
         <meta author="Nikola Jug">
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-        <header>
-            
-        </header>
+
         <?php 
         include_once("navigacija.php");
         ?>

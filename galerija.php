@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 include_once("baza.php");
 
 $veza = spojiSeNaBazu();
@@ -6,24 +9,22 @@ $veza = spojiSeNaBazu();
 
 
 ?>
-
+<!DOCTYPE html>
 <html lang="hr">
     <head>
-        <title>Hrvatske planine - Galerija slika</title>
+        <title>Galerija slika - Hrvatske planine</title>
         <meta charset="utf-8">
         <meta author="Nikola Jug">
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-        <header>
-            
-        </header>
+
         <?php 
         include_once("navigacija.php");
         ?>
 
         <section id="main">
-            <h1>Galerija</h1>
+            <h1>Galerija slika</h1>
 <!-- 
     Može filtrirati podatke na temelju naziva planine i/ili vremenskog razdoblja slikanja.
     Vremensko razdoblje se definira datumom i vremenom od i do. 
@@ -39,12 +40,14 @@ Svi datumi moraju se unositi od strane korisnika i prikazati korisniku u formatu
 Format „H:i:s” predstavlja kod PHP date funkciji i preslikava se na hrvatski format „hh.mm.ss”. 
 
 -->
-            <form id="galerija-filtracija" method="GET" action="<?php echo $_SERVER['PHP_SELF']?>">
-            <input type="text" name="planina">
-            <input type="text" name="vrijeme_od_sort" value="01.10.2020 00:00:00">
-            <input type="text" name="vrijeme_do_sort" value="01.11.2021 00:00:00">
-            <input type="submit" name="filter" value="Filtriraj">
+            <span >Filtriraj slike</span>
+            <form  method="GET" action="<?php echo $_SERVER['PHP_SELF']?>">
+            <input class="galerija-filtracija" type="text" name="planina" placeholder="Naziv planine">
+            <input class="galerija-filtracija" type="text" name="vrijeme_od_sort" value="01.10.2020 00:00:00">
+            <input class="galerija-filtracija" type="text" name="vrijeme_do_sort" value="01.11.2021 00:00:00">
+            <input type="submit" name="filter" class="gumb" value="Filtriraj">
             </form>
+            <br>
         
         <div class="container">
         
@@ -89,7 +92,7 @@ Format „H:i:s” predstavlja kod PHP date funkciji i preslikava se na hrvatski
             while ($red = mysqli_fetch_array($rezultat)) {
                 $lokacija = $red['url'];
                 $id = $red['slika_id'];
-                echo "<div><a href='planina.php?id={$id}'><img class='slika-planine-grid' src='{$lokacija}'></a></div>";
+                echo "<div><a href='slika.php?id={$id}'><img class='slika-planine-grid' src='{$lokacija}'></a></div>";
             }
             zatvoriVezuNaBazu($veza);
 

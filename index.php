@@ -21,7 +21,10 @@ Korisnik može kliknuti na prezime korisnika i dobiva galeriju javnih slika tog 
 
 Registrirani korisnik uz svoje funkcionalnosti ima i sve funkcionalnosti kao i neprijavljeni korisnik. 
 Korisnik može dodavati nove slike planina. Prilikom dodavanja bira planinu, unosi url do slike na webu, definira datum i vrijeme slikanja, daje naziv i opis slici, automatski se status slike postavlja na 1 (javna). 
-Korisnik vidi popis svih svojih slika sa informacijom o statusu. Korisnik može ažurirati podatke o slici pri čemu može promijeniti status slike (0 - privatna) ili (1 – javna).
+
+Korisnik vidi popis svih svojih slika sa informacijom o statusu.
+
+Korisnik može ažurirati podatke o slici pri čemu može promijeniti status slike (0 - privatna) ili (1 – javna).
 
 Moderator uz svoje funkcionalnosti ima i sve funkcionalnosti kao i registrirani korisnik te dodano vidi popis svih planina za koje je zadužen. 
 Odabirom planine može vidjeti popis svih javnih slika koje su dodane za tu planinu sa imenom i prezimenom osobe koja je tu sliku postavila. 
@@ -38,26 +41,33 @@ Napomena: Svi datumi moraju se unositi od strane korisnika i prikazati korisniku
 
 Projekti ne smiju sadržavati u programskom kodu komentare!
 */
-include_once("navigacija.php");
+
+session_start();
+
 ?>
 
 
 <html lang="hr">
     <head>
-        <title>Hrvatske planine - Početna</title>
+        <title>Početna - Hrvatske planine</title>
         <meta charset="utf-8">
         <meta author="Nikola Jug">
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-        <header>
+        
         <?php 
         include_once("navigacija.php");
         ?>
-        </header>
 
         <section>
+        <?php 
         
+        print_r($_SESSION);
+        if (isset($_SESSION["id_korisnik"])) {
+        echo "Prijavljeni korisnik: <br>" . $_SESSION['kor_ime'];
+        }
+        ?>
         </section>
 
         <?php
