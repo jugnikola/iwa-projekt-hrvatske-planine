@@ -3,10 +3,30 @@
 include_once("baza.php");
 // spajamo se na bazu
 
-
 /* pokrećemo sesiju funkciom session_start() */
 session_start();
 
+$id_korisnik = $_SESSION['id_korisnik'];
+
+// provjera ako je korisnik prijavljen, ako nije redirecta ga se na početnu stranicu
+// DODATI AKO JE BLOKIRAN DA SE ISPIŠE PORUKA
+if (isset($_SESSION['tip_korisnika']) === false) header("Location: index.php");
+
+// PROVJERA AKO JE KORISNIK BLOKIRAN DA MU SE ISPIŠE PORUKA DA JE BLOKIRAN
+$veza = spojiSeNaBazu();
+$upit = "SELECT blokiran FROM korisnik WHERE korisnik_id = '{$id_korisnik}'";
+$blokiran_upit = izvrsiUpit($veza, $upit);
+zatvoriVezuNaBazu($veza);
+
+$poruka="";
+$blokiran = false;
+
+while ($red = mysqli_fetch_array($blokiran_upit)) {
+    if ($red['blokiran'] == 1) {
+        $blokiran = true;
+        $poruka = "Korisnik je blokiran";
+    }
+}
 
 /*
 
@@ -16,8 +36,6 @@ definira datum i vrijeme slikanja, daje naziv i opis slici,
 automatski se status slike postavlja na 1 (javna). 
 
 */
-
-$poruka="";
 
 if (isset($_POST["dodaj-sliku-submit"])) {
 
@@ -105,11 +123,11 @@ if (isset($_POST["dodaj-sliku-submit"])) {
                 <input type="radio" name="status" value=1 checked>Javna
                 <input type="radio" name="status" value=0>Privatna<br>
 
-                <input type="submit" name="dodaj-sliku-submit" id="dodaj-sliku-submit" value="Dodaj sliku">
+                <input type="submit" name="dodaj-sliku-submit" id="dodaj-sliku-submit" value="Dodaj sliku" <?php if ($blokiran) echo 'disabled';?>>
                 
             </form>
             
-            <?=$poruka?>
+            <p class="greska"><?=$poruka?></p>
 
             </p>
 

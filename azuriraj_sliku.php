@@ -1,14 +1,31 @@
 <?php
-/*
-TODO: dinamički odabrati u select koja je to pcntl_async_signals
-automatski odabrati privatna ili javna kak je zapisano u bazi
 
-
-*/
 include_once("baza.php");
 // spajamo se na bazu
 /* pokrećemo sesiju funkciom session_start() */
 session_start();
+
+$id_korisnik = $_SESSION['id_korisnik'];
+
+// provjera ako je korisnik prijavljen, ako nije redirecta ga se na početnu stranicu
+// DODATI AKO JE BLOKIRAN DA SE ISPIŠE PORUKA
+if (isset($_SESSION['tip_korisnika']) === false) header("Location: index.php");
+
+// PROVJERA AKO JE KORISNIK BLOKIRAN DA MU SE ISPIŠE PORUKA DA JE BLOKIRAN
+$veza = spojiSeNaBazu();
+$upit = "SELECT blokiran FROM korisnik WHERE korisnik_id = '{$id_korisnik}'";
+$blokiran_upit = izvrsiUpit($veza, $upit);
+zatvoriVezuNaBazu($veza);
+
+$poruka="";
+$blokiran = false;
+
+while ($red = mysqli_fetch_array($blokiran_upit)) {
+    if ($red['blokiran'] == 1) {
+        $blokiran = true;
+        $poruka = "Korisnik je blokiran";
+    }
+}
 
 /*
 
@@ -16,7 +33,7 @@ Korisnik može ažurirati podatke o slici pri čemu može promijeniti status sli
 
 */
 
-$poruka="";
+
 global $planina_id_unesena;
 
 if (isset($_GET['id'])) {
@@ -130,10 +147,11 @@ if (isset($_POST['azuriraj-planinu-submit'])) {
                 <input type="radio" name="status" value=0 <?php if ($status == 0) echo 'checked'; ?> >Privatna<br>
                 <input type="hidden" name="id-slike" value="<?=$id_slike?>">
 
-                <input type="submit" name="azuriraj-planinu-submit" id="azuriraj-planinu-submit" value="Ažuriraj sliku">
+                <input type="submit" name="azuriraj-planinu-submit" id="azuriraj-planinu-submit" value="Ažuriraj sliku" <?php if ($blokiran) echo 'disabled';?>>
                 
             </form>
             
+            <p class="greska"><?=$poruka?></p>
 
         </section>
 

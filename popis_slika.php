@@ -3,25 +3,27 @@
 include_once("baza.php");
 // spajamo se na bazu
 
-
 /* pokrećemo sesiju funkciom session_start() */
 session_start();
 
+// provjera ako je korisnik prijavljen, ako nije redirecta ga se na početnu stranicu
+// DODATI AKO JE BLOKIRAN DA SE ISPIŠE PORUKA
+if (isset($_SESSION['tip_korisnika']) === false) header("Location: index.php");
+
 $ime_korisnika = $_SESSION["ime_korisnika"];
 
+$id_korisnik = $_SESSION["id_korisnik"];
 
-
-
-
+$veza = spojiSeNaBazu();
+$upit = "SELECT * FROM slika WHERE korisnik_id = '{$id_korisnik}'";
+$rezultat = izvrsiUpit($veza, $upit);
+zatvoriVezuNaBazu($veza);
 
 /*
 
 Korisnik vidi popis svih svojih slika sa informacijom o statusu.
 
 */
-
-
-
 
 ?>
 <!DOCTYPE html>
@@ -41,30 +43,26 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
         <section id="main">
             <h1>Popis slika korisnika <?=$ime_korisnika?></h1>
 
-            <table>
-                <thead>
-                    <th>Slika</th>
-                    <th>Naziv</th>
-                    <!-- <th>URL</th> -->
-                    <th>Opis</th>
-                    <th style="width:15%;">Datum i vrijeme slikanja</th>
-                    <th style="text-align:center">Status</th>
-                    <th>Ažuriraj sliku</th>
-                </thead>
-                
-                <caption>Popis slika korisnika <?=$ime_korisnika?></caption>
-                
-                <tbody>
-                
-                <?php
-                $veza = spojiSeNaBazu();
+            <?php
 
-                $id_korisnik = $_SESSION["id_korisnik"];
+                if ($rezultat->num_rows != 0) {
+                    echo "
+                    <table>
+                        <thead>
+                            <th>Slika</th>
+                            <th>Naziv</th>
+                            <th>Opis</th>
+                            <th style='width:15%;'>Datum i vrijeme slikanja</th>
+                            <th style='text-align:center'>Status</th>
+                            <th>Ažuriraj sliku</th>
+                        </thead>
+                        <caption>Popis slika korisnika {$ime_korisnika}</caption>
+                        <tbody>";
+                } else {
+                    echo "<p class='greska'>Korisnik nema slika.</p>";
+                }
                 
-                $upit = "SELECT * FROM slika WHERE korisnik_id = '{$id_korisnik}'";
-                
-                $rezultat = izvrsiUpit($veza, $upit);
-                
+                                
                 while ($red = mysqli_fetch_array($rezultat)){
                     $url = $red['url'];
                     $naziv = $red['naziv'];
@@ -89,8 +87,6 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
                     echo "</tr>\n";
                 }
                 
-                zatvoriVezuNaBazu($veza);
-
                 ?>
 
                 </tbody>

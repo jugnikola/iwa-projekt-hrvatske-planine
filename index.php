@@ -1,6 +1,11 @@
 <?php
 
 /* 
+
+TODO 
+dodati mehanizam provjere na dodavanje i azuriranje slika ako je korisnik blokiran - onemoguciti !!!
+
+
 Hrvatske planine
 Uloge: administrator, moderator, registrirani korisnik i anonimni/neregistrirani korisnici.
 
@@ -23,7 +28,6 @@ Registrirani korisnik uz svoje funkcionalnosti ima i sve funkcionalnosti kao i n
 Korisnik može dodavati nove slike planina. Prilikom dodavanja bira planinu, unosi url do slike na webu, definira datum i vrijeme slikanja, daje naziv i opis slici, automatski se status slike postavlja na 1 (javna). 
 
 Korisnik vidi popis svih svojih slika sa informacijom o statusu.
-
 Korisnik može ažurirati podatke o slici pri čemu može promijeniti status slike (0 - privatna) ili (1 – javna).
 
 Moderator uz svoje funkcionalnosti ima i sve funkcionalnosti kao i registrirani korisnik te dodano vidi popis svih planina za koje je zadužen. 
@@ -60,7 +64,7 @@ session_start();
         include_once("navigacija.php");
         ?>
 
-        <section>
+        <section id="main">
         <?php 
         
         print_r($_SESSION);
@@ -68,6 +72,8 @@ session_start();
         echo "Prijavljeni korisnik: <br>" . $_SESSION['kor_ime'];
         }
         ?>
+
+        <h2 style="text-align:center;">Dobrodošli na početnu stranicu Hrvatske Planine!</h2>
         </section>
 
         <?php
