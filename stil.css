@@ -184,6 +184,12 @@ font-size: 45px;
     color: red;
 }
 
+.uspjeh {
+    position: relative;
+    padding-left: 10%;
+    color: green;
+}
+
 .slika-popis {
     width: 200px;
     

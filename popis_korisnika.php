@@ -28,15 +28,15 @@ TIP KORISNIKA
 
 $veza = spojiSeNaBazu();
 
-$upit_planine = "SELECT * FROM planina ORDER BY naziv ASC";
-$rezultat_planine= izvrsiUpit($veza, $upit_planine);
+$upit_korisnici = "SELECT korisnik.*, tip_korisnika.naziv FROM korisnik INNER JOIN tip_korisnika ON tip_korisnika.tip_korisnika_id = korisnik.tip_korisnika_id ORDER BY korisnicko_ime";
+$rezultat_korisnici = izvrsiUpit($veza, $upit_korisnici);
 zatvoriVezuNaBazu($veza);
 
 ?>
 <!DOCTYPE html>
 <html lang="hr">
     <head>
-        <title>Popis planina - Hrvatske planine</title>
+        <title>Popis korisnika - Hrvatske planine</title>
         <meta charset="utf-8">
         <meta author="Nikola Jug">
         <link rel="stylesheet" type="text/css" href="stil.css">
@@ -48,9 +48,9 @@ zatvoriVezuNaBazu($veza);
         ?>
 
         <section id="main">
-            <h1>Popis planina</h1>
+            <h1>Popis korisnika</h1>
 
-           <!-- <form action="statistika_korisnika.php" method="post" style="float: left; margin-right: 20px;">
+            <form action="statistika_korisnika.php" method="post" style="float: left; margin-right: 20px;">
                 <input type="submit" class="gumb" name="statistika-korisnika" value="Statistika korisnika">
             </form>
             <form action="popis_blokiranih_korisnika.php" method="post" style="float: left; margin-right: 20px;">
@@ -59,38 +59,37 @@ zatvoriVezuNaBazu($veza);
             
             <form action="dodaj_korisnika.php" method="post" >
                 <input type="submit" class="gumb" name="dodaj-korisnika" value="Dodaj novog korisnika">
-            </form> -->
-            <a href="dodaj_planinu.php"><button class="gumb">Dodaj planinu</button></a>
+            </form>
 
 
             <table>
                 <thead>
-                    <th>Naziv planine</th>
-                    <!-- <th>Opis</th> -->
-                    <th>Lokacija</th>
-                    
+                    <th>Korisničko ime</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Tip korisnika</th>
                 </thead>
                                 
                 <tbody>
                 
                 <?php
                                 
-                while ($red = mysqli_fetch_array($rezultat_planine)){
-                    $id_planine = $red['planina_id'];
-                    $naziv = $red['naziv'];
-                    $opis = $red['opis'];
-                    $lokacija = $red['lokacija'];
-                    // = $red['email'];
-                    //$tip_korisnika = $red['tip_korisnika_id'];
-                    //$naziv_tipa = $red['naziv'];
+                while ($red = mysqli_fetch_array($rezultat_korisnici)){
+                    $id_korisnik = $red['korisnik_id'];
+                    $kor_ime = $red['korisnicko_ime'];
+                    $ime = $red['ime'];
+                    $prezime = $red['prezime'];
+                    $email = $red['email'];
+                    $tip_korisnika = $red['tip_korisnika_id'];
+                    $naziv_tipa = $red['naziv'];
 
                     echo "<tr>\n";
-                    echo "<td>{$naziv}</td>\n";
-                    //echo "<td>{$opis}</td>\n";
-                    echo "<td>{$lokacija}</td>\n";
-                    //echo "<td>{$email}</td>\n";
-                    //echo "<td>{$naziv_tipa}</td>\n";
-                    echo "<td><a href='azuriraj_planinu.php?id={$id_planine}'><button class='gumb'>Ažuriraj</button></a>";
+                    echo "<td>{$kor_ime}</td>\n";
+                    echo "<td>{$ime}</td>\n";
+                    echo "<td>{$prezime}</td>\n";
+                    echo "<td>{$email}</td>\n";
+                    echo "<td>{$naziv_tipa}</td>\n";
+                    echo "<td><a href='azuriraj_korisnika.php?id={$id_korisnik}'><button class='gumb'>Ažuriraj</button></a>";
                     echo "</tr>\n";
                 }
                 

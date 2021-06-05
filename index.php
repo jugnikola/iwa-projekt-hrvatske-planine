@@ -36,8 +36,11 @@ Klikom na prezime dobiva galeriju javnih slika odabranog korisnika. Ako želi mo
 
 Administrator uz svoje funkcionalnosti ima i sve funkcionalnosti kao i moderator. 
 Unosi, ažurira i pregledava korisnike sustava te definira i ažurira njihove tipove. 
+
 Unosi, pregledava i ažurira planine (npr. Dinara, Velebit, ...) te dodjeljuje moderatore za planinu. 
+
 Jedna planina može imati jednog ili više moderatora, jedan moderator može biti zadužen za više planina. 
+
 Administrator vidi popis blokiranih korisnika (blokiran=1) te ih može od blokirati (blokiran=0). 
 Administrator vidi statistiku broja privatnih i javih slika po korisniku sortirano prezimenu korisnika.
 
