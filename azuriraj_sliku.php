@@ -50,7 +50,7 @@ if (isset($_GET['id'])) {
     while ($red = mysqli_fetch_array($rezultat)) {
         $id_slike = $red['slika_id'];
         $url = $red['url'];
-        $dat_vrijeme_prikaz = date('d.m.Y h:i:s', strtotime($red['datum_vrijeme_slikanja']));
+        $dat_vrijeme_prikaz = date('d.m.Y H:i:s', strtotime($red['datum_vrijeme_slikanja']));
         $naziv_slike = $red['naziv'];
         $opis = $red['opis'];
         $status = $red['status'];
@@ -68,7 +68,7 @@ if (isset($_POST['azuriraj-planinu-submit'])) {
     $planina_id = $_POST["planina-id"];
     $id_slike = $_POST["id-slike"];
     $url = $_POST["url"];
-    $dat_vrijeme = date('Y-m-d h:i:s', strtotime($_POST["dat-vrijeme"]));
+    $dat_vrijeme = date('Y-m-d H:i:s', strtotime($_POST["dat-vrijeme"]));
     $naziv = $_POST["naziv-slike"];
     $opis = $_POST["opis-slike"];
     $status = $_POST["status"];

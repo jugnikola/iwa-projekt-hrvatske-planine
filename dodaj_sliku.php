@@ -42,7 +42,7 @@ if (isset($_POST["dodaj-sliku-submit"])) {
     $planina_id = $_POST["planina-id"];
     $url = $_POST["url"];
     
-    $dat_vrijeme = date('Y-m-d h:i:s', strtotime($_POST["dat-vrijeme"]));
+    $dat_vrijeme = date('Y-m-d H:i:s', strtotime($_POST["dat-vrijeme"]));
 
     $naziv = $_POST["naziv-slike"];
     $opis = $_POST["opis-slike"];

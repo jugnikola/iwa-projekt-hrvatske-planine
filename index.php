@@ -3,7 +3,10 @@
 /* 
 
 TODO 
-dodati mehanizam provjere na dodavanje i azuriranje slika ako je korisnik blokiran - onemoguciti !!!
+
+MAKNUTI POPIS PLANINA MODERATORA KADA JE PRIJAVLJEN ADMIN
+NA POPIS PLANINA STAVITI LINK DA SE VIDI POPIS SLIKA PO PLANINI (ona stranica di se mogu blokirati korisnici )
+
 
 
 Hrvatske planine
@@ -47,6 +50,10 @@ Administrator vidi statistiku broja privatnih i javih slika po korisniku sortira
 Napomena: Svi datumi moraju se unositi od strane korisnika i prikazati korisniku u formatu „d.m.Y“, a vrijeme (00:00:00 – 23:59:59) u obliku „H:i:s“ (ne koristiti date i time HTML tip za input element). Format „d.m.Y” predstavlja kod PHP date funkciji i preslikava se na hrvatski format „dd.mm.gggg”. Format „H:i:s” predstavlja kod PHP date funkciji i preslikava se na hrvatski format „hh.mm.ss”. Poslužitelj se naziva localhost a baza podataka je iwa_2020_vz_projekt. Korisnik za pristup do baze podataka naziva se iwa_2020 a lozinka je foi2020. Kod izrade projektnog rješenja treba se točno držati uputa i NE SMIJE se mijenjati (naziv poslužitelja, baze podataka, struktura tablica, korisnik i lozinka). Završeno rješenje projektnog zadatka treba poslati kroz sustav za predaju rješenja nakon čega slijedi obavijest i dogovor o obrani projekta. Obrana projektnog rješenja se obavlja na računalu i bazi podataka nastavnika.
 
 Projekti ne smiju sadržavati u programskom kodu komentare!
+
+
+
+
 */
 
 session_start();
@@ -70,10 +77,10 @@ session_start();
         <section id="main">
         <?php 
         
-        print_r($_SESSION);
+        /*print_r($_SESSION);
         if (isset($_SESSION["id_korisnik"])) {
-        echo "Prijavljeni korisnik: <br>" . $_SESSION['kor_ime'];
-        }
+        echo "<br>Prijavljeni korisnik: <br>" . $_SESSION['kor_ime'];
+        }*/
         ?>
 
         <h2 style="text-align:center;">Dobrodošli na početnu stranicu Hrvatske Planine!</h2>

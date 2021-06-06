@@ -24,11 +24,11 @@ Odabirom planine može vidjeti popis svih javnih slika koje su dodane za tu plan
 } else if (isset($_GET['planina'])){
                 $naziv = $_GET['planina'];
                 if (isset($_GET['filter'])) {
-                    $vrijeme_od = date('Y-m-d h:i:s', strtotime($_GET['vrijeme_od_sort']));
+                    $vrijeme_od = date('Y-m-d H:i:s', strtotime($_GET['vrijeme_od_sort']));
                     // $vrijeme_od = "01.10.2020 10:00:00";
-                    $vrijeme_do = date('Y-m-d h:i:s', strtotime($_GET['vrijeme_do_sort']));
+                    $vrijeme_do = date('Y-m-d H:i:s', strtotime($_GET['vrijeme_do_sort']));
     
-                    // echo date('Y-m-d h:i:s', strtotime($vrijeme_od));
+                    // echo date('Y-m-d H:i:s', strtotime($vrijeme_od));
     
                     $upit="SELECT slika.url, slika.slika_id FROM slika 
                     INNER JOIN planina ON planina.planina_id = slika.planina_id

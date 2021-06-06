@@ -67,7 +67,7 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
                     $url = $red['url'];
                     $naziv = $red['naziv'];
                     $opis = $red['opis'];
-                    $dat_vrijeme = date('d.m.Y h:i:s', strtotime($red['datum_vrijeme_slikanja']));
+                    $dat_vrijeme = date('d.m.Y H:i:s', strtotime($red['datum_vrijeme_slikanja']));
                     $slika_id = $red['slika_id'];
 
                     if ($red['status'] == 1) {
