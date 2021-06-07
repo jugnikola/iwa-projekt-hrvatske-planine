@@ -95,7 +95,8 @@ if (isset($_GET['planina'])) {
 
     $id_korisnik = $_SESSION["id_korisnik"];
                
-    $upit = "SELECT slika.url, slika.korisnik_id, korisnik.ime, korisnik.prezime FROM slika INNER JOIN korisnik ON slika.korisnik_id = korisnik.korisnik_id
+    $upit = "SELECT slika.url, slika.korisnik_id, korisnik.ime, korisnik.prezime, planina.naziv FROM slika INNER JOIN korisnik ON slika.korisnik_id = korisnik.korisnik_id
+    INNER JOIN planina ON slika.planina_id = planina.planina_id
     WHERE slika.status=1 AND slika.planina_id = '{$id_planine}'";
                 
     $rezultat = izvrsiUpit($veza, $upit);
@@ -117,45 +118,50 @@ if (isset($_GET['planina'])) {
     </head>
     <body>
 
+
         <?php 
-        include_once("navigacija.php");
+        include_once("navigacija.php");        
+
+        // var_dump($rezultat);
+
+        $naziv_red = mysqli_fetch_array($rezultat);
+        $naziv_planine = $naziv_red['naziv'];
+        
         ?>
-
         <section id="main">
-            <h1>Popis slika planine <?=$ime_korisnika?></h1>
+            <h1>Popis slika planine <?=$naziv_planine?></h1>
+        
+        <?php
+        if ($rezultat->num_rows != 0) {
+            echo "
+            <table>
+                <thead>
+                    <th>Slika</th>
+                    <th>Korisnik</th>                      
+                </thead>
+                <tbody>";
+        } else {
+            echo "<p class='greska'>Za odabranu planinu nema slika.</p>";
+        }
 
-                
-                <?php
-                // var_dump($rezultat);
-                if ($rezultat->num_rows != 0) {
-                    echo "
-                    <table>
-                        <thead>
-                            <th>Slika</th>
-                            <th>Korisnik</th>                      
-                        </thead>
-                        <caption>Popis slika korisnika {$ime_korisnika}</caption>
-                        <tbody>";
-                } else {
-                    echo "<p class='greska'>Za odabranu planinu nema slika.</p>";
-                }
-                
-                while ($red = mysqli_fetch_array($rezultat)){
-                $url = $red['url'];
-                $ime = $red['ime'];
-                $prezime = $red['prezime'];
-                $id_korisnika_slika = $red['korisnik_id'];
-                $ime_skripte = $_SERVER['PHP_SELF'];
-                
-                echo "<tr>\n";
-                echo "<td><img src='{$url}' class='slika-popis'></td>\n";
-                echo "<td>{$ime} <a href='galerija.php?korisnik={$id_korisnika_slika}'>{$prezime}</a></td>\n";
-                echo "<td><form name='blokiraj' method='get' action='{$ime_skripte}'><input type='submit' class='gumb' value='Blokiraj korisnika'><input type='hidden' name='id_korisnik' value='{$id_korisnika_slika}'><input type='hidden' name='planina' value='{$id_planine}'></form></td>\n";
-                echo "</tr>\n";
-                }
-                   
+      
+        while ($red = mysqli_fetch_array($rezultat)){
+        $url = $red['url'];
+        $ime = $red['ime'];
+        $prezime = $red['prezime'];
+        $id_korisnika_slika = $red['korisnik_id'];
+        $ime_skripte = $_SERVER['PHP_SELF'];
+        
 
-                ?>
+        echo "<tr>\n";
+        echo "<td><img src='{$url}' class='slika-popis'></td>\n";
+        echo "<td>{$ime} <a href='galerija.php?korisnik={$id_korisnika_slika}'>{$prezime}</a></td>\n";
+        echo "<td><form name='blokiraj' method='get' action='{$ime_skripte}'><input type='submit' class='gumb' value='Blokiraj korisnika'><input type='hidden' name='id_korisnik' value='{$id_korisnika_slika}'><input type='hidden' name='planina' value='{$id_planine}'></form></td>\n";
+        echo "</tr>\n";
+        }
+            
+
+        ?>
 
                 </tbody>
             </table>

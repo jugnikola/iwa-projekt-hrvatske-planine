@@ -109,11 +109,17 @@ if (isset($_POST['azuriraj-planinu-submit'])) {
         <section id="main">
             <h1>Ažuriranje slike</h1>
 
-            <img src="<?=$url?>" class="slika-azuriraj" />
+            <table class="tablica-dodaj">
+                <tbody>
             <form id=azuriraj-planinu name=azuriraj-planinu method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
-                <label for="">Planina:</label><br>
+            <tr>
+                <td></td>
+                <td><img src="<?=$url?>" class="slika-azuriraj" /></td>
+            </tr>
+            <tr>
+            <td><label for="">Planina:</label></td>
                 
-                <select name="planina-id" autofocus required>
+               <td><select name="planina-id" class="galerija-filtracija dodaj-azuriraj" autofocus required>
                 <?php 
                     // treba napraviti upit kojim će se ispisati sve dostupne planine u bazi
                     $veza = spojiSeNaBazu();
@@ -131,25 +137,40 @@ if (isset($_POST['azuriraj-planinu-submit'])) {
                     zatvoriVezuNaBazu($veza);
                 ?>
                 
-                </select>
+                </select></td>
+                </tr>
                 
-                <br>
-                <label for="url">URL slike planine:</label><br>
-                <input type="url" name="url" required value="<?=$url?>"><br>
-                <label for="dat-vrijeme">Datum i vrijeme slikanja:</label><br>
-                <input type="text" name="dat-vrijeme" value="<?=$dat_vrijeme_prikaz?>" required><br>
-                <label for="naziv-slike">Naziv slike:</label><br>
-                <input type="text" name="naziv-slike" required value="<?=$naziv_slike?>"><br>
-                <label for="opis-slike">Opis slike:</label><br>
-                <textarea name="opis-slike" rows="10" cols="50" required><?=$opis?></textarea><br>
-                <label for="status">Status slike:</label>
-                <input type="radio" name="status" value=1 <?php if ($status == 1) echo 'checked'; ?> >Javna
-                <input type="radio" name="status" value=0 <?php if ($status == 0) echo 'checked'; ?> >Privatna<br>
+                <tr>
+                    <td><label for="url">URL slike planine:</label></td>
+                <td><input type="url" name="url" required class="galerija-filtracija dodaj-azuriraj" value="<?=$url?>"></td>
+                <tr>
+                <td><label for="dat-vrijeme">Datum i vrijeme slikanja:</label></td>
+                <td><input type="text" name="dat-vrijeme" class="galerija-filtracija dodaj-azuriraj" value="<?=$dat_vrijeme_prikaz?>" required></td>
+                </tr>
+                <tr>
+                    <td><label for="naziv-slike">Naziv slike:</label></td>
+                    <td><input type="text" name="naziv-slike" required class="galerija-filtracija dodaj-azuriraj" value="<?=$naziv_slike?>"></td>
+                </tr>
+                <tr>
+                    <td><label for="opis-slike">Opis slike:</label></td>
+                <td><textarea name="opis-slike" rows="10" cols="50" required class="galerija-filtracija dodaj-azuriraj"><?=$opis?></textarea></td>
+                </tr>
+                <tr>
+                <td><label for="status">Status slike:</label></td>
+                <td><input type="radio" name="status" style="margin-left: 10em;"value=1 <?php if ($status == 1) echo 'checked'; ?> >Javna
+                <input type="radio" name="status"  value=0 <?php if ($status == 0) echo 'checked'; ?> >Privatna<br>
                 <input type="hidden" name="id-slike" value="<?=$id_slike?>">
+                </td>
+                </tr>
+                <tr>
+                <td></td>
+                <td><input type="submit" name="azuriraj-planinu-submit" style="margin-left: 10em;"id="azuriraj-planinu-submit" value="Ažuriraj sliku" class="gumb" <?php if ($blokiran) echo 'disabled';?>></td>
+                </tr>
 
-                <input type="submit" name="azuriraj-planinu-submit" id="azuriraj-planinu-submit" value="Ažuriraj sliku" <?php if ($blokiran) echo 'disabled';?>>
-                
-            </form>
+                </form>
+                </tbody>
+                </table>
+                            
             
             <p class="greska"><?=$poruka?></p>
 

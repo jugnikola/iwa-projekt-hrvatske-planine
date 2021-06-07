@@ -50,22 +50,30 @@ TIP KORISNIKA
         <section id="main">
             <h1>Popis planina <?php //$ime_korisnika?></h1>
 
-            <table>
-                <thead>
-                    <th>Planina</th>
-                    <!--<th>Slike planine</th> -->
-                </thead>
+            <?php
+            $veza = spojiSeNaBazu();
                 
-                <caption>Popis planina moderatora <?=$ime_korisnika?></caption>
+            $upit = "SELECT moderator.*, planina.naziv FROM moderator INNER JOIN planina ON planina.planina_id = moderator.planina_id WHERE moderator.korisnik_id = '{$id_moderatora}'";
                 
-                <tbody>
+            $rezultat = izvrsiUpit($veza, $upit);
+
+            
+            if ($rezultat->num_rows != 0) {
+                    echo "
+                    <table>
+                        <thead>
+                        <th>Planina</th>
+                        <!--<th>Slike planine</th> -->
+                        </thead>
                 
-                <?php
-                $veza = spojiSeNaBazu();
+                        <caption>Popis planina moderatora <?=$ime_korisnika?></caption>
                 
-                $upit = "SELECT moderator.*, planina.naziv FROM moderator INNER JOIN planina ON planina.planina_id = moderator.planina_id WHERE moderator.korisnik_id = '{$id_moderatora}'";
+                        <tbody>";
+                } else {
+                    echo "<p class='greska'>Moderator ne moderira niti jednu planinu.</p>";
+                }          
                 
-                $rezultat = izvrsiUpit($veza, $upit);
+ 
                 
                 while ($red = mysqli_fetch_array($rezultat)){
                     $id_planine = $red['planina_id'];

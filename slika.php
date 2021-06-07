@@ -107,14 +107,35 @@ zatvoriVezuNaBazu($veza);
 
             -->
 
-        <ul>
-            <li>Korisnik: <?=$ime . " " . "<a href='galerija.php?korisnik={$id_korisnik}'>" . $prezime . "</a>"?></li>
-            <li>Planina: <a href="galerija.php?planina=<?=$id_planine?>"><?=$naziv_planine?></a></li>
-            <li>Opis planine: <?=$opis_planine?></li>
-            <li>Lokacija: <?=$lokacija?></li>
-            <li>Geografska širina i dužina: <?=$sirina . ", " . $duzina?></li>
+        <table class="tablica-opis-slike">
+            <tbody>
+            <tr>
+                <td style="width: 25%" >Postavio korisnik:</td>
+                <td><?=$ime . " " . "<a href='galerija.php?korisnik={$id_korisnik}'>" . $prezime . "</a>"?></td>
+            </tr>
+            <tr>    
+            <td>Planina:</td>
+            <td><a href="galerija.php?planina=<?=$id_planine?>"><?=$naziv_planine?></a></td>
+</tr>
+<tr>
+            <td>Opis slike:</td>
+            <td><?=$opis_slike?></td>
+</tr>
+<tr>
+            <td id="opis-planine" >Opis planine:</td>
+            <td><?=$opis_planine?></td>
+</tr>
+<tr>
+            <td>Lokacija:</td>
+            <td><?=$lokacija?></td>
+</tr>    
+            <tr>
+                <td>Geografska širina i dužina:</td>
+                <td><?=$sirina . ", " . $duzina?></td>
+</tr>
 
-        </ul>
+            </tbody>
+        </table>
 
         </p>
 

@@ -89,11 +89,14 @@ if (isset($_POST["dodaj-sliku-submit"])) {
         <section id="main">
             <h1>Dodavanje slike</h1>
 
+            <table class="tablica-dodaj">
+                <tbody>
             <form id=dodaj-sliku name=dodaj-sliku method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
-                <label for="">Planina:</label><br>
+                <tr>
+                    <td><label for="">Planina:</label></td>
                 
-                <select name="planina-id" autofocus required>
-                <?php 
+                    <td><select name="planina-id" class="galerija-filtracija dodaj-azuriraj" autofocus required>
+                    <?php 
                     // treba napraviti upit kojim će se ispisati sve dostupne planine u bazi
                     $veza = spojiSeNaBazu();
                     $upit = "SELECT planina_id, naziv FROM planina";
@@ -108,24 +111,37 @@ if (isset($_POST["dodaj-sliku-submit"])) {
                     zatvoriVezuNaBazu($veza);
                 ?>
                 
-                </select>
-                
-                <br>
-                <label for="url">URL slike planine:</label><br>
-                <input type="url" name="url" required><br>
-                <label for="dat-vrijeme">Datum i vrijeme slikanja:</label><br>
-                <input type="text" name="dat-vrijeme" value="01.06.2021 00:00:00" required><br>
-                <label for="naziv-slike">Naziv slike:</label><br>
-                <input type="text" name="naziv-slike" required><br>
-                <label for="opis-slike">Opis slike:</label><br>
-                <textarea name="opis-slike" rows="10" cols="50" required></textarea><br>
-                <label for="status">Status slike:</label>
-                <input type="radio" name="status" value=1 checked>Javna
-                <input type="radio" name="status" value=0>Privatna<br>
-
-                <input type="submit" name="dodaj-sliku-submit" id="dodaj-sliku-submit" value="Dodaj sliku" <?php if ($blokiran) echo 'disabled';?>>
-                
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><label for="url">URL slike planine:</label></td>
+                    <td><input type="url" name="url" class="galerija-filtracija dodaj-azuriraj" required></td>
+                </tr>
+                    <tr>
+                    <td><label for="dat-vrijeme">Datum i vrijeme slikanja:</label></td>
+                    <td><input type="text" name="dat-vrijeme" class="galerija-filtracija dodaj-azuriraj" value="01.06.2021 00:00:00" required></td>
+                </tr>
+                    <tr>
+                    <td><label for="naziv-slike">Naziv slike:</label></td>
+                    <td><input type="text" name="naziv-slike" class="galerija-filtracija dodaj-azuriraj" required></td>
+                </tr>
+                    <tr>
+                    <td><label for="opis-slike">Opis slike:</label></td>
+                    <td><textarea name="opis-slike" rows="10" cols="50" class="galerija-filtracija dodaj-azuriraj"  required></textarea></td>
+                </tr>
+                    <tr>
+                    <td><label for="status">Status slike:</label></td>
+                    <td><input type="radio" name="status" value=1 checked style="margin-left: 10em">Javna<input type="radio" name="status" value=0 style="margin-left: 2em">Privatna</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="dodaj-sliku-submit" id="dodaj-sliku-submit" class="gumb" value="Dodaj sliku" style="margin-left: 10em;margin-top: 1em;" <?php if ($blokiran) echo 'disabled';?>></td>
+                    </tr>
+                    
+                </tbody>
             </form>
+
+                </table>
             
             <p class="greska"><?=$poruka?></p>
 

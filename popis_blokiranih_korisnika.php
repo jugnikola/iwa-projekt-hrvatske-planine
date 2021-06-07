@@ -74,7 +74,7 @@ if (isset($_POST["odblokiraj-korisnika"])) {
             <?php
             if ($rezultat_korisnici->num_rows != 0) {
                     echo "
-                    <table>
+                    <table style='margin-left: 20%'>
                 <thead>
                     <th>Korisničko ime</th>
                     <th>Ime</th>

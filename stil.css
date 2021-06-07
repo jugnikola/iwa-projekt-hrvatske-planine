@@ -90,7 +90,7 @@ footer {
     bottom: 0;
     left: 0;
     right: 0; */
-    margin-top: 300px;
+    margin-top: 10rem;
 
 }
 
@@ -122,10 +122,31 @@ footer {
     border-radius: 5px;
 }
 
+.dodaj-azuriraj {
+    width: 80%;
+    margin-left: 10em;
+}
+
+textarea {
+    font-family: Roboto;
+    resize: vertical;
+    min-height: 100px;
+    max-height: 500px;
+}
+
+.tablica-dodaj {
+    margin-left: 15%;
+}
+option {
+    font-size: 1.1em;
+    
+}
+
 .slika-planine {
     width: 800px;
     position: relative;
     left: 15%;
+    margin: 0 auto;
 }
 
 h1 {
@@ -178,6 +199,11 @@ font-size: 45px;
 
 }
 
+.popis-korisnika-gumb {
+    margin-right: 1em;
+    margin-bottom: 2em;
+}
+
 .greska {
     position: relative;
     padding-left: 10%;
@@ -196,8 +222,28 @@ font-size: 45px;
 }
 
 .slika-azuriraj {
-    width: 300px;
+    width: 400px;
     margin-right: 3em;
+    margin-bottom: 1em;
+}
+
+#filter-tablica {
+    background-color: #f5f5f5;
+}
+
+.tablica-opis-slike {
+    margin-top: 3em;
+    border: 2px #DCE1E3 solid;
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+.tablica-opis-slike > tbody > tr > td {
+    padding: 8px;
+}
+
+.tablica-opis-slike > tbody > tr:nth-child(odd) {
+	background-color: #DCE1E3;
 }
 
 
@@ -208,21 +254,32 @@ table {
     
 }
 
+/*
 .parni {
 	background-color: #e0fbfc;
+}*/
+
+#tablica-popis-slika-korisnika {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    
 }
+  
+
 
 thead {
-	background-color: #98c1d9;
+	background-color: #93a3b8;
+    
 
 }
 
 th {
-    border-bottom: 5px solid #333;
- 
+    border-bottom: 3px solid #333;
+    padding: 8px;
 }
 
-tbody > tr:nth-child(even) {
+tbody > tr:nth-child(odd) {
 	background-color: #DCE1E3;
 }
 

@@ -57,7 +57,7 @@ $rezultat_korisnici = izvrsiUpit($veza, $upit_korisnici);
                 <input type="submit" class="gumb" name="dodaj-korisnika" value="Dodaj novog korisnika">
             </form> -->
 
-            <table>
+            <table style="margin-left: 12%">
                 <thead>
                     <th>Korisničko ime</th>
                     <th>Ime</th>

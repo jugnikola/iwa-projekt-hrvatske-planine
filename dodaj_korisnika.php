@@ -80,10 +80,13 @@ zatvoriVezuNaBazu($veza);
         <section id="main">
             <h1>Dodavanje novog korisnika</h1>
 
+            <table class="tablica-dodaj">
+            <tbody>
             <form id=dodaj-korisnika name=dodaj-korisnika method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
-                <label for="korisnik-tip">Tip korisnika:</label><br>
+            <tr>    
+            <td><label for="korisnik-tip">Tip korisnika:</label></td>
                 
-                <select name="korisnik-tip" autofocus required>
+                <td><select name="korisnik-tip" autofocus required class="galerija-filtracija dodaj-azuriraj">
                 <?php 
                     // treba napraviti upit kojim će se ispisati sve dostupne tipove korisnika u bazi
 
@@ -97,28 +100,45 @@ zatvoriVezuNaBazu($veza);
                     
                 ?>
                 
-                </select>
+                </select></td>
+                </tr>
+                <tr>
+                <td><label for="kor-ime">Korisničko ime:</label></td>
+                <td><input type="text" name="kor-ime" required value="" class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                <td><label for="lozinka">Lozinka:</label></td>
+                <td><input type="password" name="lozinka" required value="" class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                <td><label for="ime">Ime:</label></td>
+                <td><input type="text" name="ime" value="" required class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                <td><label for="prezime">Prezime:</label></td>
+                <td><input type="text" name="prezime" required value="" class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                <td><label for="email">e-mail:</label></td>
+                <td><input type="text" name="email" required value="" class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                <td><label for="slika">Putanja slike:</label></td>
+                <td><input type="text" name="slika" required value="" class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                <td><label for="status">Status korisnika:</label></td>
+                <td><input type="checkbox" name="status" value=1 style="margin-left: 10em;">Blokiran</td>
+                </tr>
                 
-                <br>
-                <label for="kor-ime">Korisničko ime:</label><br>
-                <input type="text" name="kor-ime" required value=""><br>
-                <label for="lozinka">Lozinka:</label><br>
-                <input type="password" name="lozinka" required value=""><br>
-                <label for="ime">Ime:</label><br>
-                <input type="text" name="ime" value="" required><br>
-                <label for="prezime">Prezime:</label><br>
-                <input type="text" name="prezime" required value=""><br>
-                <label for="email">e-mail:</label><br>
-                <input type="text" name="email" required value=""><br>
-                <label for="slika">Putanja slike:</label><br>
-                <input type="text" name="slika" required value=""><br>
-                <label for="status">Status korisnika:</label>
-                <input type="checkbox" name="status" value=1>Blokiran
-                <br>
-
-                <input type="submit" name="unos-korisnika-submit" id="unos-korisnika-submit" value="Unesi korisnika">
+                <tr>
+                <td></td>
+                <td><input type="submit" name="unos-korisnika-submit" id="unos-korisnika-submit" value="Unesi korisnika" class="gumb" style="margin-left: 10em;margin-top: 1em;"></td>
+                </tr>
                 
             </form>
+            </tbody>
+        </table>
             
             <p class="greska"><?=$poruka?></p>
 

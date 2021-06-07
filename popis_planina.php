@@ -60,7 +60,7 @@ zatvoriVezuNaBazu($veza);
             <form action="dodaj_korisnika.php" method="post" >
                 <input type="submit" class="gumb" name="dodaj-korisnika" value="Dodaj novog korisnika">
             </form> -->
-            <a href="dodaj_planinu.php"><button class="gumb">Dodaj planinu</button></a>
+            <a href="dodaj_planinu.php"><button class="gumb" style="margin-bottom: 2em;">Dodaj planinu</button></a>
 
 
             <table>
@@ -85,7 +85,7 @@ zatvoriVezuNaBazu($veza);
                     //$naziv_tipa = $red['naziv'];
 
                     echo "<tr>\n";
-                    echo "<td>{$naziv}</td>\n";
+                    echo "<td><a href='popis_slika_korisnika.php?planina={$id_planine}'>{$naziv}</a></td>\n";
                     //echo "<td>{$opis}</td>\n";
                     echo "<td>{$lokacija}</td>\n";
                     //echo "<td>{$email}</td>\n";

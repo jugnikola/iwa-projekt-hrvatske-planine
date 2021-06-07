@@ -40,13 +40,23 @@ Svi datumi moraju se unositi od strane korisnika i prikazati korisniku u formatu
 Format „H:i:s” predstavlja kod PHP date funkciji i preslikava se na hrvatski format „hh.mm.ss”. 
 
 -->
-            <span >Filtriraj slike</span>
-            <form  method="GET" action="<?php echo $_SERVER['PHP_SELF']?>">
-            <input class="galerija-filtracija" type="text" name="planina" placeholder="Naziv planine">
-            <input class="galerija-filtracija" type="text" name="vrijeme_od_sort" value="01.10.2020 00:00:00">
-            <input class="galerija-filtracija" type="text" name="vrijeme_do_sort" value="01.11.2021 00:00:00">
-            <input type="submit" name="filter" class="gumb" value="Filtriraj">
-            </form>
+            <table style="margin: 0 auto">
+                <tbody>
+                    <tr>
+                        <td><span >Filtriraj slike</span></td>
+                        <td><span>Od:</span></td>
+                        <td><span >Do:</span></td>
+                    </tr>
+                    <tr id="filter-tablica">
+                        <form  method="GET" action="<?php echo $_SERVER['PHP_SELF']?>"></td>
+                        <td><input class="galerija-filtracija" type="text" name="planina" placeholder="Naziv planine"></td>
+                        <td><input class="galerija-filtracija" type="text" name="vrijeme_od_sort" value="01.10.2020 00:00:00"></td>
+                        <td><input class="galerija-filtracija" type="text" name="vrijeme_do_sort" value="31.10.2021 24:00:00"></td>
+                        <td><input type="submit" name="filter" class="gumb" value="Filtriraj"></td>
+                        </form>
+                    </tr>
+                </tbody>
+            </table>
             <br>
         
         <div class="container">

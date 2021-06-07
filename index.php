@@ -2,11 +2,37 @@
 
 /* 
 
-TODO 
+TODO S PAPIRA
 
-MAKNUTI POPIS PLANINA MODERATORA KADA JE PRIJAVLJEN ADMIN
-NA POPIS PLANINA STAVITI LINK DA SE VIDI POPIS SLIKA PO PLANINI (ona stranica di se mogu blokirati korisnici )
+DONE --- MAKNUTI POPIS PLANINA MODERATORA KADA JE PRIJAVLJEN ADMIN --- DONE
+DONE --- NA POPIS PLANINA STAVITI LINK DA SE VIDI POPIS SLIKA PO PLANINI (ona stranica di se mogu blokirati korisnici )
+DONE --- GUMB STATISTIKA, UNOS KORISNIKA i POPIS BLOKIRANIH PROMIJENJENI NA a element i button umjesto forme
 
+PRIKAZ GREŠKE UMJESTO PRAZNE TABLICE
+sređeno na:
+popis slika
+popis slika korisnika
+popis planina moderatora
+
+
+popis blokiranih korisnika
+
+
+DORADITI DIZAJN
+
+dodavanje korisnika, 
+dodavanje slika done
+
+treba srediti i:
+
+ažuriranje korisnika
+
+
+-- planina --
+
+
+
+-----
 
 
 Hrvatske planine

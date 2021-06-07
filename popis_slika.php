@@ -47,7 +47,7 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
 
                 if ($rezultat->num_rows != 0) {
                     echo "
-                    <table>
+                    <table id='tablica-popis-slika-korisnika'>
                         <thead>
                             <th>Slika</th>
                             <th>Naziv</th>
@@ -56,7 +56,6 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
                             <th style='text-align:center'>Status</th>
                             <th>Ažuriraj sliku</th>
                         </thead>
-                        <caption>Popis slika korisnika {$ime_korisnika}</caption>
                         <tbody>";
                 } else {
                     echo "<p class='greska'>Korisnik nema slika.</p>";
@@ -83,7 +82,7 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
                     echo "<td>{$opis}</td>\n";
                     echo "<td>{$dat_vrijeme}</td>\n";
                     echo "<td>{$status}</td>\n";
-                    echo "<td><a href='azuriraj_sliku.php?id={$slika_id}'>Ažuriraj</a></td>";
+                    echo "<td><a href='azuriraj_sliku.php?id={$slika_id}'><button class='gumb'>Ažuriraj</button></a></td>";
                     echo "</tr>\n";
                 }
                 

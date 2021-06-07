@@ -101,11 +101,17 @@ zatvoriVezuNaBazu($veza);
         <section id="main">
             <h1>Ažuriranje korisnika</h1>
 
-            <img src="<?=$url?>" class="slika-azuriraj" />
-            <form id=azuriraj-korisnika name=azuriraj-korisnika method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
-                <label for="korisnik-tip">Tip korisnika:</label><br>
-                
-                <select name="korisnik-tip" autofocus required>
+            <table class="tablica-dodaj">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td><img src="<?=$url?>" class="slika-azuriraj" alt="Slika korisnika"/></td>
+                </tr>
+                    <form id=azuriraj-korisnika name=azuriraj-korisnika method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
+                <tr>
+                <td><label for="korisnik-tip">Tip korisnika:</label></td>
+                <td><select name="korisnik-tip" autofocus required class="galerija-filtracija dodaj-azuriraj">
+
                 <?php 
                     // treba napraviti upit kojim će se ispisati sve dostupne tipove korisnika u bazi
 
@@ -119,28 +125,43 @@ zatvoriVezuNaBazu($veza);
                     
                 ?>
                 
-                </select>
-                
-                <br>
-                <label for="kor-ime">Korisničko ime:</label><br>
-                <input type="text" name="kor-ime" required value="<?=$kor_ime?>"><br>
-                <label for="lozinka">Lozinka:</label><br>
-                <input type="password" name="lozinka" required value="<?=$lozinka?>"><br>
-                <label for="ime">Ime:</label><br>
-                <input type="text" name="ime" value="<?=$ime?>" required><br>
-                <label for="prezime">Prezime:</label><br>
-                <input type="text" name="prezime" required value="<?=$prezime?>"><br>
-                <label for="email">e-mail:</label><br>
-                <input type="text" name="email" required value="<?=$email?>"><br>
-                <label for="slika">Putanja slike:</label><br>
-                <input type="text" name="slika" required value="<?=$slika?>"><br>
-                <label for="status">Status korisnika:</label>
-                <input type="checkbox" name="status" value=1 <?php if ($blokiran == 1) echo 'checked'; ?> >Blokiran
-                <br><input type="hidden" name="id-korisnik" value="<?=$korisnik_id?>">
-
-                <input type="submit" name="azuriraj-korisnika-submit" id="azuriraj-korisnika-submit" value="Ažuriraj korisnika">
-                
+                </select></td>
+                </tr>
+                <tr>
+                    <td><label for="kor-ime">Korisničko ime:</label></td>
+                    <td><input type="text" name="kor-ime" required class="galerija-filtracija dodaj-azuriraj" value="<?=$kor_ime?>"></td>
+                </tr>
+                <tr>
+                    <td><label for="lozinka">Lozinka:</label></td>
+                    <td><input type="password" name="lozinka" class="galerija-filtracija dodaj-azuriraj" required value="<?=$lozinka?>"></td>
+                </tr>
+                <tr>
+                    <td><label for="ime">Ime:</label></td>
+                    <td><input type="text" name="ime" class="galerija-filtracija dodaj-azuriraj" value="<?=$ime?>" required></td>
+                </tr>
+                <tr>
+                <td><label for="prezime">Prezime:</label></td>
+                <td><input type="text" name="prezime" class="galerija-filtracija dodaj-azuriraj" required value="<?=$prezime?>"></td>
+                </tr>
+                <tr>
+                <td><label for="email">e-mail:</label></td>
+                <td><input type="text" name="email" class="galerija-filtracija dodaj-azuriraj" required value="<?=$email?>"></td>
+                </tr>
+                <tr>
+                <td><label for="slika">Putanja slike:</label></td>
+                <td><input type="text" name="slika" class="galerija-filtracija dodaj-azuriraj" required value="<?=$slika?>"></td>
+                </tr>
+                <tr> 
+                <td><label for="status">Status korisnika:</label></td>
+                <td><input type="checkbox" name="status" style="margin-left: 10em" value=1 <?php if ($blokiran == 1) echo 'checked'; ?> >Blokiran<input type="hidden" name="id-korisnik" value="<?=$korisnik_id?>"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" name="azuriraj-korisnika-submit" style="margin-left: 10em" id="azuriraj-korisnika-submit" class="gumb" value="Ažuriraj korisnika"></td>
+                </tr>
             </form>
+            </tbody>
+            </table>
             
             <p class="greska"><?=$poruka?></p>
 

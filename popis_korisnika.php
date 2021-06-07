@@ -50,6 +50,7 @@ zatvoriVezuNaBazu($veza);
         <section id="main">
             <h1>Popis korisnika</h1>
 
+<!--    MAKNUTI KADA SE VERIFICIRAJU ZAHTJEVI PROJEKTA
             <form action="statistika_korisnika.php" method="post" style="float: left; margin-right: 20px;">
                 <input type="submit" class="gumb" name="statistika-korisnika" value="Statistika korisnika">
             </form>
@@ -60,13 +61,18 @@ zatvoriVezuNaBazu($veza);
             <form action="dodaj_korisnika.php" method="post" >
                 <input type="submit" class="gumb" name="dodaj-korisnika" value="Dodaj novog korisnika">
             </form>
-
-
-            <table>
+-->
+            <div style="text-align: center">
+                <a href="statistika_korisnika.php"><button class="gumb popis-korisnika-gumb" >Statistika korisnika</button></a>
+                <a href="popis_blokiranih_korisnika.php"><button class="gumb popis-korisnika-gumb" style="margin-right: 1em;">Popis blokiranih korisnika</button></a>
+                <a href="dodaj_korisnika.php"><button class="gumb popis-korisnika-gumb">Dodaj novog korisnika</button></a>
+            </div>
+            <table style="margin-left: 20%">
                 <thead>
                     <th>Korisničko ime</th>
                     <th>Ime</th>
                     <th>Prezime</th>
+                    <th>e-mail</th>
                     <th>Tip korisnika</th>
                 </thead>
                                 
@@ -99,6 +105,7 @@ zatvoriVezuNaBazu($veza);
 
                 </tbody>
             </table>
+            
         </section>
         <?php include_once("podnozje.php");?>
     </body>

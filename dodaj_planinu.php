@@ -90,31 +90,52 @@ zatvoriVezuNaBazu($veza);
             <h1>Dodavanje planine</h1>
 
             <!-- <img src="<?=$url?>" class="slika-azuriraj" /> -->
+            
+            <table class="tablica-dodaj">
+            <tbody>
             <form id=dodaj-planinu name=dodaj-planinu method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
-                <label for="naziv-planine">Naziv planine:</label><br>
-                <input type="text" name="naziv-planine"></br>
-                <label for="opis">Opis:</label><br>
-                <textarea name="opis" cols=60 rows=10 required></textarea><br>
-                <label for="lokacija">Lokacija:</label><br>
-                <input type="text" name="lokacija" required><br>
-                <label for="geo-sirina">Geografska širina:</label><br>
-                <input type="text" name="geo-sirina" required><br>
-                <label for="geo-duzina">Geografska dužina:</label><br>
-                <input type="text" name="geo-duzina" required ><br>
-                <label for="moderatori[]">Moderatori planine:</label><br>
+                
+                <tr>
+                    <td><label for="naziv-planine">Naziv planine:</label></td>
+                    <td><input type="text" name="naziv-planine" class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                    <td><label for="opis">Opis:</label></td>
+                    <td><textarea name="opis" cols=60 rows=10 required class="galerija-filtracija dodaj-azuriraj"></textarea></td>
+                </tr>
+                <tr>
+                <td><label for="lokacija">Lokacija:</label></td>
+                <td><input type="text" name="lokacija" required class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                    <td><label for="geo-sirina">Geografska širina:</label></td>
+                    <td><input type="text" name="geo-sirina" required placeholder="45.00000" class="galerija-filtracija dodaj-azuriraj"></td>
+                </tr>
+                <tr>
+                <td><label for="geo-duzina">Geografska dužina:</label></td>
+                    <td><input type="text" name="geo-duzina" placeholder="15.00000" required class="galerija-filtracija dodaj-azuriraj" ></td>
+                </tr>
+                <tr>
+                <td><label for="moderatori[]">Moderatori planine:</label></td>
+                <td>
                 <?php
                 while ($red = mysqli_fetch_array($svi_moderatori)) {
                     $moderator_id = $red['korisnik_id'];
                     $ime_prezime = $red['ime'] . " " . $red['prezime'];
                     
-                    echo "<input type='checkbox' name='moderatori[]' value='{$moderator_id}'>{$ime_prezime}<br>";
+                    echo "<input type='checkbox' name='moderatori[]' style='margin-left: 10em' value='{$moderator_id}'>{$ime_prezime}<br>";
                 }
                 ?>
-                <br>
-
-                <input type="submit" name="dodaj-planinu-submit" id="dodaj-planinu-submit" value="Dodaj planinu">
-                
+                </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" name="dodaj-planinu-submit" id="dodaj-planinu-submit" value="Dodaj planinu" class="gumb" style="margin-left: 10em; margin-top: 1em;"></td>
+                </tr>
+   
             </form>
+            </tbody>
+            </table>
             
             <p class="greska"><?=$poruka?></p>
 
