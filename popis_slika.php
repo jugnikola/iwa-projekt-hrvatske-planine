@@ -47,14 +47,14 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
 
                 if ($rezultat->num_rows != 0) {
                     echo "
-                    <table id='tablica-popis-slika-korisnika'>
+                    <table class='tablica-popis-slika-korisnika'>
                         <thead>
-                            <th>Slika</th>
-                            <th>Naziv</th>
-                            <th>Opis</th>
-                            <th style='width:15%;'>Datum i vrijeme slikanja</th>
-                            <th style='text-align:center'>Status</th>
-                            <th>Ažuriraj sliku</th>
+                            <th id='slika-slika'>Slika</th>
+                            <th id='slika-naziv'>Naziv</th>
+                            <th id='slika-opis'>Opis</th>
+                            <th id='slika-dat'>Datum i vrijeme slikanja</th>
+                            <th id='slika-status'>Status</th>
+                            <th id='slika-azuriraj'>Ažuriraj sliku</th>
                         </thead>
                         <tbody>";
                 } else {

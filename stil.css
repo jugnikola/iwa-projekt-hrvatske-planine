@@ -137,6 +137,11 @@ textarea {
 .tablica-dodaj {
     margin-left: 15%;
 }
+
+.tablica-dodaj > tbody > tr:nth-child(even) {
+	background-color: #f5f5f5;
+}
+
 option {
     font-size: 1.1em;
     
@@ -254,21 +259,43 @@ table {
     
 }
 
-/*
-.parni {
-	background-color: #e0fbfc;
-}*/
-
-#tablica-popis-slika-korisnika {
+.tablica-popis-slika-korisnika {
     table-layout: fixed;
     width: 100%;
-    border-collapse: collapse;
-    
+    border-collapse: collapse;    
 }
   
+#slika-slika {
+    width: 22%;
+}
+#slika-naziv {
+    width: 12%;
+}
 
+#slika-opis {
+    width: 30%;
+}
 
-thead {
+#slika-dat {
+    width: 15%;
+}
+
+#slika-status {
+    width: 8%;
+    text-align: center;
+}
+
+#slika-azuriraj {
+    width: 7%;
+}
+
+/*
+
+dat-slika
+status-slika
+azuriraj-slika
+ */
+ thead {
 	background-color: #93a3b8;
     
 
@@ -279,7 +306,7 @@ th {
     padding: 8px;
 }
 
-tbody > tr:nth-child(odd) {
+tbody > tr:nth-child(even) {
 	background-color: #DCE1E3;
 }
 
