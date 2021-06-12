@@ -101,6 +101,9 @@ if (isset($_GET['planina'])) {
                 
     $rezultat = izvrsiUpit($veza, $upit);
 
+    $upit_naziv_planine = "SELECT naziv FROM planina WHERE planina_id = '{$id_planine}'";
+    $rezultat_naziv_planine = izvrsiUpit($veza, $upit_naziv_planine);
+
     zatvoriVezuNaBazu($veza);
 
 }
@@ -111,7 +114,7 @@ if (isset($_GET['planina'])) {
 <!DOCTYPE html>
 <html lang="hr">
     <head>
-        <title>Popis planina - <?=$ime_korisnika?> - Hrvatske planine</title>
+        <title>Popis slika planine - Hrvatske planine</title>
         <meta charset="utf-8">
         <meta author="Nikola Jug">
         <link rel="stylesheet" type="text/css" href="stil.css">
@@ -124,7 +127,7 @@ if (isset($_GET['planina'])) {
 
         // var_dump($rezultat);
 
-        $naziv_red = mysqli_fetch_array($rezultat);
+        $naziv_red = mysqli_fetch_array($rezultat_naziv_planine);
         $naziv_planine = $naziv_red['naziv'];
         
         ?>
@@ -134,7 +137,7 @@ if (isset($_GET['planina'])) {
         <?php
         if ($rezultat->num_rows != 0) {
             echo "
-            <table>
+            <table id='tablica-popis-slika-korisnika'>
                 <thead>
                     <th>Slika</th>
                     <th>Korisnik</th>                      
@@ -154,7 +157,7 @@ if (isset($_GET['planina'])) {
         
 
         echo "<tr>\n";
-        echo "<td><img src='{$url}' class='slika-popis'></td>\n";
+        echo "<td><img src='{$url}' class='slika-korisnika'></td>\n";
         echo "<td>{$ime} <a href='galerija.php?korisnik={$id_korisnika_slika}'>{$prezime}</a></td>\n";
         echo "<td><form name='blokiraj' method='get' action='{$ime_skripte}'><input type='submit' class='gumb' value='Blokiraj korisnika'><input type='hidden' name='id_korisnik' value='{$id_korisnika_slika}'><input type='hidden' name='planina' value='{$id_planine}'></form></td>\n";
         echo "</tr>\n";
@@ -166,7 +169,7 @@ if (isset($_GET['planina'])) {
                 </tbody>
             </table>
 
-            <p class="greska"><?=$poruka?></p>            
+            <p class="uspjeh"><?=$poruka?></p>            
 
         </section>
 

@@ -48,7 +48,7 @@ TIP KORISNIKA
         ?>
 
         <section id="main">
-            <h1>Popis planina <?php //$ime_korisnika?></h1>
+            <h1>Popis planina moderatora <?=$ime_korisnika?></h1>
 
             <?php
             $veza = spojiSeNaBazu();
@@ -60,14 +60,10 @@ TIP KORISNIKA
             
             if ($rezultat->num_rows != 0) {
                     echo "
-                    <table>
+                    <table id='tablica-planine-moderatora'>
                         <thead>
-                        <th>Planina</th>
-                        <!--<th>Slike planine</th> -->
-                        </thead>
-                
-                        <caption>Popis planina moderatora <?=$ime_korisnika?></caption>
-                
+                        <!-- <th>Planina</th> -->
+                        </thead>               
                         <tbody>";
                 } else {
                     echo "<p class='greska'>Moderator ne moderira niti jednu planinu.</p>";

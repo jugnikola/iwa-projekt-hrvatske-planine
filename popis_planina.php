@@ -60,10 +60,10 @@ zatvoriVezuNaBazu($veza);
             <form action="dodaj_korisnika.php" method="post" >
                 <input type="submit" class="gumb" name="dodaj-korisnika" value="Dodaj novog korisnika">
             </form> -->
-            <a href="dodaj_planinu.php"><button class="gumb" style="margin-bottom: 2em;">Dodaj planinu</button></a>
+            <a href="dodaj_planinu.php"><button class="gumb" style="margin-bottom: 2em; margin-left: 45%;">Dodaj planinu</button></a>
 
 
-            <table>
+            <table id="tablica-popis-planina">
                 <thead>
                     <th>Naziv planine</th>
                     <!-- <th>Opis</th> -->
@@ -78,7 +78,7 @@ zatvoriVezuNaBazu($veza);
                 while ($red = mysqli_fetch_array($rezultat_planine)){
                     $id_planine = $red['planina_id'];
                     $naziv = $red['naziv'];
-                    $opis = $red['opis'];
+                    // $opis = $red['opis'];
                     $lokacija = $red['lokacija'];
                     // = $red['email'];
                     //$tip_korisnika = $red['tip_korisnika_id'];
@@ -88,6 +88,7 @@ zatvoriVezuNaBazu($veza);
                     echo "<td><a href='popis_slika_korisnika.php?planina={$id_planine}'>{$naziv}</a></td>\n";
                     //echo "<td>{$opis}</td>\n";
                     echo "<td>{$lokacija}</td>\n";
+                    // echo "<td>{$opis}</td>\n";
                     //echo "<td>{$email}</td>\n";
                     //echo "<td>{$naziv_tipa}</td>\n";
                     echo "<td><a href='azuriraj_planinu.php?id={$id_planine}'><button class='gumb'>Ažuriraj</button></a>";

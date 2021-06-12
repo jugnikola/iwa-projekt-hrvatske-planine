@@ -43,7 +43,7 @@ session_start();
             <td>Varaždin</td>
         </tr>
         <tr>
-            <td>Godina (ak. godina prvog upisa):</td>
+            <td>Godina (ak. godina prvog upisa kolegija IWA):</td>
             <td>2020./2021.</td>
         </tr>
         </table>
