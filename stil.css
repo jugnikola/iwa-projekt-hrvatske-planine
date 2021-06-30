@@ -1,11 +1,8 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
-*/
-
 @font-face {
     font-family: Roboto;
     src: url(fontovi/Roboto-Regular.ttf);
 }
+
 @font-face {
     font-family: Abel;
     src: url(fontovi/Abel-Regular.ttf);
@@ -41,7 +38,6 @@ nav {
     list-style-type: none;
     width: 100%;
     margin: 0;
-    /*padding: 15px;*/
     background-color: #3D5A80;
     text-align: center;
 }
@@ -62,22 +58,9 @@ nav > ul {
     padding: 15px;
 }
 
-
 .navigacija:hover {
     background-color: #5D79A1;
-    
-    /* 
-    #A2ACBD
-    #3D5A80 bdazzled blue
-#98c1d9 pale cerulean
-#e0fbfc	light cyan
-#ee6c4d	burnt sienna
-#293241	gunmetal
-
-#DCE1E3 lighter grey
-    */
 }
-
 
 footer {
     background-color: #293241;
@@ -86,16 +69,9 @@ footer {
 	text-align: center;
 	line-height: 200%;
 	font-size: 20px;
-    /* position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0; */
-   
     margin-top: 100px;
     margin-bottom: 0;
     clear: both;
-
-
 }
 
 #main {
@@ -152,7 +128,6 @@ textarea {
 
 option {
     font-size: 1.1em;
-    
 }
 
 .slika-planine {
@@ -178,7 +153,6 @@ font-size: 45px;
     padding: 40px;
     background-color: #DCE1E3;
     border-radius: 5px;
-
 }
 
 .unos {
@@ -192,11 +166,8 @@ font-size: 45px;
 
 .prijava_submit {
     width: 97%;
-    
     margin-top: 10px;
-    
 }
-
 
 .gumb{
     border:none;
@@ -204,7 +175,6 @@ font-size: 45px;
     background-color: #a2acbd;
     color: #333;
     padding: 10px;
-
 }
 
 .gumb:hover{
@@ -229,15 +199,6 @@ font-size: 45px;
     transition-property: background-color;
     transition-duration: 150ms;
     transition-timing-function: linear;
-    
-}
-
-.pocetna-slika:hover {
-/*    width: 70%;
-    transition-property: width;
-    transition-delay: 150ms;
-    transition-timing-function: ease-in-out;
-*/
 }
 
 .popis-korisnika-gumb {
@@ -262,7 +223,6 @@ font-size: 45px;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0 auto; 
     text-align: center;
-    /*text-align: center; */
 }
 
 .pocetna-sadrzaj-stavka {
@@ -327,12 +287,8 @@ font-size: 45px;
     padding-right: 8px;
 }
 
-
 table {
-	/* background-color: #98c1d9; */
 	font-size: 16px;
-
-    
 }
 
 .tablica-popis-slika-korisnika {
@@ -365,16 +321,8 @@ table {
     width: 7%;
 }
 
-/*
-
-dat-slika
-status-slika
-azuriraj-slika
- */
- thead {
+thead {
 	background-color: #93a3b8;
-    
-
 }
 
 th {
@@ -397,7 +345,6 @@ td {
     }
     .slika-planine-grid{
         width: 400px;
-        
     }
     body {
         width: 80%;

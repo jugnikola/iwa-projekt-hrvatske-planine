@@ -1,17 +1,10 @@
 <?php
-
 include_once("baza.php");
-// spajamo se na bazu
-/* pokrećemo sesiju funkciom session_start() */
 session_start();
 
 $id_korisnik = $_SESSION['id_korisnik'];
-
-// provjera ako je korisnik prijavljen, ako nije redirecta ga se na početnu stranicu
-// DODATI AKO JE BLOKIRAN DA SE ISPIŠE PORUKA
 if (isset($_SESSION['tip_korisnika']) === false) header("Location: index.php");
 
-// PROVJERA AKO JE KORISNIK BLOKIRAN DA MU SE ISPIŠE PORUKA DA JE BLOKIRAN
 $veza = spojiSeNaBazu();
 $upit = "SELECT blokiran FROM korisnik WHERE korisnik_id = '{$id_korisnik}'";
 $blokiran_upit = izvrsiUpit($veza, $upit);
@@ -27,21 +20,12 @@ while ($red = mysqli_fetch_array($blokiran_upit)) {
     }
 }
 
-/*
-
-Korisnik može ažurirati podatke o slici pri čemu može promijeniti status slike (0 - privatna) ili (1 – javna).
-
-*/
-
-
 global $planina_id_unesena;
 
 if (isset($_GET['id'])) {
     $id_slike = $_GET['id'];
 
     $veza = spojiSeNaBazu();
-
-    // upit koji uzima postojeće podatke iz baze na temelju id-a slike, onda ih zapisujemo u varijable i kasnije insertamo kao value u formu
 
     $upit = "SELECT * FROM slika WHERE slika_id = '{$id_slike}'";    
 
@@ -61,8 +45,6 @@ if (isset($_GET['id'])) {
     }
     zatvoriVezuNaBazu($veza);
 }
-
-// Ako je poslana forma za ažuriranje, izvršava se upit za unos podataka isti kao i u dodaj_sliku.php
 
 if (isset($_POST['azuriraj-planinu-submit'])) {
     $planina_id = $_POST["planina-id"];
@@ -85,13 +67,9 @@ if (isset($_POST['azuriraj-planinu-submit'])) {
     } else {
         $poruka = "Ažuriranje nije uspjelo.";
     }
-
     zatvoriVezuNaBazu($veza);
-
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="hr">
     <head>
@@ -101,82 +79,70 @@ if (isset($_POST['azuriraj-planinu-submit'])) {
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-
         <?php 
         include_once("navigacija.php");
         ?>
-
         <section id="main">
             <h1>Ažuriranje slike</h1>
-
             <table class="tablica-dodaj">
                 <tbody>
-            <form id=azuriraj-planinu name=azuriraj-planinu method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
-            <tr>
-                <td></td>
-                <td><img src="<?=$url?>" class="slika-azuriraj" /></td>
-            </tr>
-            <tr>
-            <td><label for="">Planina:</label></td>
-                
-               <td><select name="planina-id" class="galerija-filtracija dodaj-azuriraj" autofocus required>
-                <?php 
-                    // treba napraviti upit kojim će se ispisati sve dostupne planine u bazi
-                    $veza = spojiSeNaBazu();
-                    $upit = "SELECT planina_id, naziv FROM planina";
+                <form id=azuriraj-planinu name=azuriraj-planinu method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
+                <tr>
+                    <td></td>
+                    <td><img src="<?=$url?>" class="slika-azuriraj" /></td>
+                </tr>
+                <tr>
+                    <td><label for="">Planina:</label></td>
+                    <td><select name="planina-id" class="galerija-filtracija dodaj-azuriraj" autofocus required>
+                    <?php 
+                        // treba napraviti upit kojim će se ispisati sve dostupne planine u bazi
+                        $veza = spojiSeNaBazu();
+                        $upit = "SELECT planina_id, naziv FROM planina";
 
-                    $rezultat = izvrsiUpit($veza, $upit);
+                        $rezultat = izvrsiUpit($veza, $upit);
 
-                    while ($red = mysqli_fetch_array($rezultat)) {
-                        $planina_id = $red['planina_id'];
-                        $naziv = $red['naziv'];
-                        echo "<option value='{$planina_id}'";
-                        if ($planina_id == $planina_id_unesena) echo " selected ";
-                        echo ">{$naziv}</option>";
-                    }
-                    zatvoriVezuNaBazu($veza);
-                ?>
-                
-                </select></td>
-                </tr>
-                
-                <tr>
-                    <td><label for="url">URL slike planine:</label></td>
-                <td><input type="url" name="url" required class="galerija-filtracija dodaj-azuriraj" value="<?=$url?>"></td>
-                <tr>
-                <td><label for="dat-vrijeme">Datum i vrijeme slikanja:</label></td>
-                <td><input type="text" name="dat-vrijeme" class="galerija-filtracija dodaj-azuriraj" value="<?=$dat_vrijeme_prikaz?>" required></td>
-                </tr>
-                <tr>
-                    <td><label for="naziv-slike">Naziv slike:</label></td>
-                    <td><input type="text" name="naziv-slike" required class="galerija-filtracija dodaj-azuriraj" value="<?=$naziv_slike?>"></td>
-                </tr>
-                <tr>
-                    <td><label for="opis-slike">Opis slike:</label></td>
-                <td><textarea name="opis-slike" rows="10" cols="50" required class="galerija-filtracija dodaj-azuriraj"><?=$opis?></textarea></td>
-                </tr>
-                <tr>
-                <td><label for="status">Status slike:</label></td>
-                <td><input type="radio" name="status" style="margin-left: 10em;"value=1 <?php if ($status == 1) echo 'checked'; ?> >Javna
-                <input type="radio" name="status"  value=0 <?php if ($status == 0) echo 'checked'; ?> >Privatna<br>
-                <input type="hidden" name="id-slike" value="<?=$id_slike?>">
-                </td>
-                </tr>
-                <tr>
-                <td></td>
-                <td><input type="submit" name="azuriraj-planinu-submit" style="margin-left: 10em;"id="azuriraj-planinu-submit" value="Ažuriraj sliku" class="gumb" <?php if ($blokiran) echo 'disabled';?>></td>
-                </tr>
-
-                </form>
+                        while ($red = mysqli_fetch_array($rezultat)) {
+                            $planina_id = $red['planina_id'];
+                            $naziv = $red['naziv'];
+                            echo "<option value='{$planina_id}'";
+                            if ($planina_id == $planina_id_unesena) echo " selected ";
+                            echo ">{$naziv}</option>";
+                        }
+                        zatvoriVezuNaBazu($veza);
+                    ?>
+                    </select></td>
+                    </tr>
+                    <tr>
+                        <td><label for="url">URL slike planine:</label></td>
+                        <td><input type="url" name="url" required class="galerija-filtracija dodaj-azuriraj" value="<?=$url?>"></td>
+                    <tr>
+                        <td><label for="dat-vrijeme">Datum i vrijeme slikanja:</label></td>
+                        <td><input type="text" name="dat-vrijeme" class="galerija-filtracija dodaj-azuriraj" value="<?=$dat_vrijeme_prikaz?>" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="naziv-slike">Naziv slike:</label></td>
+                        <td><input type="text" name="naziv-slike" required class="galerija-filtracija dodaj-azuriraj" value="<?=$naziv_slike?>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="opis-slike">Opis slike:</label></td>
+                    <td><textarea name="opis-slike" rows="10" cols="50" required class="galerija-filtracija dodaj-azuriraj"><?=$opis?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label for="status">Status slike:</label></td>
+                        <td><input type="radio" name="status" style="margin-left: 10em;"value=1 <?php if ($status == 1) echo 'checked'; ?> >Javna
+                        <input type="radio" name="status"  value=0 <?php if ($status == 0) echo 'checked'; ?> >Privatna<br>
+                        <input type="hidden" name="id-slike" value="<?=$id_slike?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="azuriraj-planinu-submit" style="margin-left: 10em;"id="azuriraj-planinu-submit" value="Ažuriraj sliku" class="gumb" <?php if ($blokiran) echo 'disabled';?>></td>
+                    </tr>
+                    </form>
                 </tbody>
                 </table>
-                            
-            
             <p class="greska"><?=$poruka?></p>
-
         </section>
-
         <?php include_once("podnozje.php");?>
-
     </body>
 </html>

@@ -1,30 +1,16 @@
 <?php
-
-include_once("baza.php");
-// spajamo se na bazu
-
-/* pokrećemo sesiju funkciom session_start() */
 session_start();
+include_once("baza.php");
 
-// provjera ako je korisnik prijavljen, ako nije redirecta ga se na početnu stranicu
-// DODATI AKO JE BLOKIRAN DA SE ISPIŠE PORUKA
 if (isset($_SESSION['tip_korisnika']) === false) header("Location: index.php");
 
 $ime_korisnika = $_SESSION["ime_korisnika"];
-
 $id_korisnik = $_SESSION["id_korisnik"];
 
 $veza = spojiSeNaBazu();
 $upit = "SELECT * FROM slika WHERE korisnik_id = '{$id_korisnik}'";
 $rezultat = izvrsiUpit($veza, $upit);
 zatvoriVezuNaBazu($veza);
-
-/*
-
-Korisnik vidi popis svih svojih slika sa informacijom o statusu.
-
-*/
-
 ?>
 <!DOCTYPE html>
 <html lang="hr">
@@ -35,16 +21,12 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-
         <?php 
         include_once("navigacija.php");
         ?>
-
         <section id="main">
             <h1>Popis slika korisnika <?=$ime_korisnika?></h1>
-
             <?php
-
                 if ($rezultat->num_rows != 0) {
                     echo "
                     <table class='tablica-popis-slika-korisnika'>
@@ -59,9 +41,7 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
                         <tbody>";
                 } else {
                     echo "<p class='greska'>Korisnik nema slika.</p>";
-                }
-                
-                                
+                }         
                 while ($red = mysqli_fetch_array($rezultat)){
                     $url = $red['url'];
                     $naziv = $red['naziv'];
@@ -85,16 +65,10 @@ Korisnik vidi popis svih svojih slika sa informacijom o statusu.
                     echo "<td><a href='azuriraj_sliku.php?id={$slika_id}'><button class='gumb'>Ažuriraj</button></a></td>";
                     echo "</tr>\n";
                 }
-                
                 ?>
-
                 </tbody>
             </table>
-            
-
         </section>
-
         <?php include_once("podnozje.php");?>
-
     </body>
 </html>

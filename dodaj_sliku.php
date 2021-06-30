@@ -1,18 +1,10 @@
 <?php
-
 include_once("baza.php");
-// spajamo se na bazu
-
-/* pokrećemo sesiju funkciom session_start() */
 session_start();
 
 $id_korisnik = $_SESSION['id_korisnik'];
-
-// provjera ako je korisnik prijavljen, ako nije redirecta ga se na početnu stranicu
-// DODATI AKO JE BLOKIRAN DA SE ISPIŠE PORUKA
 if (isset($_SESSION['tip_korisnika']) === false) header("Location: index.php");
 
-// PROVJERA AKO JE KORISNIK BLOKIRAN DA MU SE ISPIŠE PORUKA DA JE BLOKIRAN
 $veza = spojiSeNaBazu();
 $upit = "SELECT blokiran FROM korisnik WHERE korisnik_id = '{$id_korisnik}'";
 $blokiran_upit = izvrsiUpit($veza, $upit);
@@ -28,22 +20,10 @@ while ($red = mysqli_fetch_array($blokiran_upit)) {
     }
 }
 
-/*
-
-Korisnik može dodavati nove slike planina. 
-Prilikom dodavanja bira planinu, unosi url do slike na webu, 
-definira datum i vrijeme slikanja, daje naziv i opis slici, 
-automatski se status slike postavlja na 1 (javna). 
-
-*/
-
 if (isset($_POST["dodaj-sliku-submit"])) {
-
     $planina_id = $_POST["planina-id"];
     $url = $_POST["url"];
-    
     $dat_vrijeme = date('Y-m-d H:i:s', strtotime($_POST["dat-vrijeme"]));
-
     $naziv = $_POST["naziv-slike"];
     $opis = $_POST["opis-slike"];
     $status = $_POST["status"];
@@ -52,7 +32,6 @@ if (isset($_POST["dodaj-sliku-submit"])) {
     $veza = spojiSeNaBazu();
     $upit = "INSERT INTO `slika`(`planina_id`, `korisnik_id`, `naziv`, `url`, `opis`, `datum_vrijeme_slikanja`, `status`) VALUES ('{$planina_id}', '{$korisnik_id}', '{$naziv}', '{$url}', '{$opis}', '{$dat_vrijeme}', '{$status}')";
     
-
     $rezultat = izvrsiUpit($veza, $upit);
 
     if ($rezultat) {
@@ -62,15 +41,8 @@ if (isset($_POST["dodaj-sliku-submit"])) {
     } else {
         $poruka = "Zapis nije uspio.";
     }
-    /*while ($red = mysqli_fetch_array($rezultat)) {
-        
-    }*/
-
     zatvoriVezuNaBazu($veza);
-
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="hr">
@@ -81,28 +53,21 @@ if (isset($_POST["dodaj-sliku-submit"])) {
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-
         <?php 
         include_once("navigacija.php");
         ?>
-
         <section id="main">
             <h1>Dodavanje slike</h1>
-
             <table class="tablica-dodaj">
                 <tbody>
             <form id=dodaj-sliku name=dodaj-sliku method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
                 <tr>
                     <td><label for="">Planina:</label></td>
-                
                     <td><select name="planina-id" class="galerija-filtracija dodaj-azuriraj" autofocus required>
                     <?php 
-                    // treba napraviti upit kojim će se ispisati sve dostupne planine u bazi
                     $veza = spojiSeNaBazu();
                     $upit = "SELECT planina_id, naziv FROM planina";
-
                     $rezultat = izvrsiUpit($veza, $upit);
-
                     while ($red = mysqli_fetch_array($rezultat)) {
                         $planina_id = $red['planina_id'];
                         $naziv = $red['naziv'];
@@ -110,7 +75,6 @@ if (isset($_POST["dodaj-sliku-submit"])) {
                     }
                     zatvoriVezuNaBazu($veza);
                 ?>
-                
                     </select></td>
                 </tr>
                 <tr>
@@ -137,19 +101,11 @@ if (isset($_POST["dodaj-sliku-submit"])) {
                         <td></td>
                         <td><input type="submit" name="dodaj-sliku-submit" id="dodaj-sliku-submit" class="gumb" value="Dodaj sliku" style="margin-left: 10em;margin-top: 1em;" <?php if ($blokiran) echo 'disabled';?>></td>
                     </tr>
-                    
                 </tbody>
             </form>
-
                 </table>
-            
             <p class="greska"><?=$poruka?></p>
-
-            </p>
-
         </section>
-
         <?php include_once("podnozje.php");?>
-
     </body>
 </html>

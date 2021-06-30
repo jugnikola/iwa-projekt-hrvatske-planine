@@ -1,28 +1,12 @@
 <?php
-
-// AŽURIRAJ KORISNIKA
-
 include_once("baza.php");
-// spajamo se na bazu
-/* pokrećemo sesiju funkciom session_start() */
 session_start();
 
 $id_korisnik = $_SESSION['id_korisnik'];
 
-// Preusmjeravanje ako korisnik nije moderator ili admin
 if ((isset($_SESSION['id_korisnik']) == false) || ($_SESSION['tip_korisnika'] > 0)) header("Location: index.php");
 
 $poruka="";
-
-
-/*
-
-Administrator uz svoje funkcionalnosti ima i sve funkcionalnosti kao i moderator. 
-Unosi, ažurira i pregledava korisnike sustava te definira i ažurira njihove tipove.
-
-*/
-
-// Ako je poslana forma za ažuriranje, izvršava se upit za unos podataka isti kao i u dodaj_sliku.php
 
 if (isset($_POST['azuriraj-korisnika-submit'])) {
     $tip_korisnika_unos = $_POST["korisnik-tip"];
@@ -50,9 +34,7 @@ if (isset($_POST['azuriraj-korisnika-submit'])) {
     } else {
         $poruka = "Ažuriranje nije uspjelo.";
     }
-
     zatvoriVezuNaBazu($veza);
-
 } 
 
 if (isset($_GET['id'])) {    
@@ -71,19 +53,14 @@ if (isset($_GET['id'])) {
         $email = $red['email'];
         $blokiran = $red['blokiran'];
         $slika = $red['slika'];
-
     }
 }
 
-// dohvaćanje tipova korisnika za punjenje selecta
 $veza = spojiSeNaBazu();
 $upit_tip_korisnika = "SELECT * FROM `tip_korisnika`";
 $tipovi_korisnika = izvrsiUpit($veza, $upit_tip_korisnika);
 zatvoriVezuNaBazu($veza);
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="hr">
     <head>
@@ -93,81 +70,69 @@ zatvoriVezuNaBazu($veza);
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-
         <?php 
         include_once("navigacija.php");
         ?>
-
         <section id="main">
             <h1>Ažuriranje korisnika</h1>
-
             <table class="tablica-dodaj">
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td><img src="<?=$url?>" class="slika-azuriraj" alt="Slika korisnika"/></td>
-                </tr>
-                    <form id=azuriraj-korisnika name=azuriraj-korisnika method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
-                <tr>
-                <td><label for="korisnik-tip">Tip korisnika:</label></td>
-                <td><select name="korisnik-tip" autofocus required class="galerija-filtracija dodaj-azuriraj">
-
-                <?php 
-                    // treba napraviti upit kojim će se ispisati sve dostupne tipove korisnika u bazi
-
-                    while ($red = mysqli_fetch_array($tipovi_korisnika)) {
-                        $tip_korisnika_baza = $red['tip_korisnika_id'];
-                        $naziv = $red['naziv'];
-                        echo "<option value='{$tip_korisnika_baza}'";
-                        if ($tip_korisnika_baza == $tip_korisnika) echo " selected";
-                        echo ">{$naziv}</option>";
-                    }
-                    
-                ?>
-                
-                </select></td>
-                </tr>
-                <tr>
-                    <td><label for="kor-ime">Korisničko ime:</label></td>
-                    <td><input type="text" name="kor-ime" required class="galerija-filtracija dodaj-azuriraj" value="<?=$kor_ime?>"></td>
-                </tr>
-                <tr>
-                    <td><label for="lozinka">Lozinka:</label></td>
-                    <td><input type="password" name="lozinka" class="galerija-filtracija dodaj-azuriraj" required value="<?=$lozinka?>"></td>
-                </tr>
-                <tr>
-                    <td><label for="ime">Ime:</label></td>
-                    <td><input type="text" name="ime" class="galerija-filtracija dodaj-azuriraj" value="<?=$ime?>" required></td>
-                </tr>
-                <tr>
-                <td><label for="prezime">Prezime:</label></td>
-                <td><input type="text" name="prezime" class="galerija-filtracija dodaj-azuriraj" required value="<?=$prezime?>"></td>
-                </tr>
-                <tr>
-                <td><label for="email">e-mail:</label></td>
-                <td><input type="text" name="email" class="galerija-filtracija dodaj-azuriraj" required value="<?=$email?>"></td>
-                </tr>
-                <tr>
-                <td><label for="slika">Putanja slike:</label></td>
-                <td><input type="text" name="slika" class="galerija-filtracija dodaj-azuriraj" required value="<?=$slika?>"></td>
-                </tr>
-                <tr> 
-                <td><label for="status">Status korisnika:</label></td>
-                <td><input type="checkbox" name="status" style="margin-left: 10em" value=1 <?php if ($blokiran == 1) echo 'checked'; ?> >Blokiran<input type="hidden" name="id-korisnik" value="<?=$korisnik_id?>"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" name="azuriraj-korisnika-submit" style="margin-left: 10em" id="azuriraj-korisnika-submit" class="gumb" value="Ažuriraj korisnika"></td>
-                </tr>
-            </form>
-            </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td><img src="<?=$url?>" class="slika-azuriraj" alt="Slika korisnika"/></td>
+                    </tr>
+                        <form id=azuriraj-korisnika name=azuriraj-korisnika method="POST" action="<?= $_SERVER['PHP_SELF'];?>">
+                    <tr>
+                        <td><label for="korisnik-tip">Tip korisnika:</label></td>
+                        <td><select name="korisnik-tip" autofocus required class="galerija-filtracija dodaj-azuriraj">
+                    <?php 
+                        while ($red = mysqli_fetch_array($tipovi_korisnika)) {
+                            $tip_korisnika_baza = $red['tip_korisnika_id'];
+                            $naziv = $red['naziv'];
+                            echo "<option value='{$tip_korisnika_baza}'";
+                            if ($tip_korisnika_baza == $tip_korisnika) echo " selected";
+                            echo ">{$naziv}</option>";
+                        }
+                    ?>
+                    </select></td>
+                    </tr>
+                    <tr>
+                        <td><label for="kor-ime">Korisničko ime:</label></td>
+                        <td><input type="text" name="kor-ime" required class="galerija-filtracija dodaj-azuriraj" value="<?=$kor_ime?>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="lozinka">Lozinka:</label></td>
+                        <td><input type="password" name="lozinka" class="galerija-filtracija dodaj-azuriraj" required value="<?=$lozinka?>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="ime">Ime:</label></td>
+                        <td><input type="text" name="ime" class="galerija-filtracija dodaj-azuriraj" value="<?=$ime?>" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="prezime">Prezime:</label></td>
+                        <td><input type="text" name="prezime" class="galerija-filtracija dodaj-azuriraj" required value="<?=$prezime?>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">e-mail:</label></td>
+                        <td><input type="text" name="email" class="galerija-filtracija dodaj-azuriraj" required value="<?=$email?>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="slika">Putanja slike:</label></td>
+                        <td><input type="text" name="slika" class="galerija-filtracija dodaj-azuriraj" required value="<?=$slika?>"></td>
+                    </tr>
+                    <tr> 
+                        <td><label for="status">Status korisnika:</label></td>
+                        <td><input type="checkbox" name="status" style="margin-left: 10em" value=1 <?php if ($blokiran == 1) echo 'checked'; ?> >Blokiran<input type="hidden" name="id-korisnik" value="<?=$korisnik_id?>"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="azuriraj-korisnika-submit" style="margin-left: 10em" id="azuriraj-korisnika-submit" class="gumb" value="Ažuriraj korisnika"></td>
+                    </tr>
+                        </form>
+                </tbody>
             </table>
-            
             <p class="greska"><?=$poruka?></p>
-
         </section>
-
         <?php include_once("podnozje.php");?>
-
     </body>
 </html>

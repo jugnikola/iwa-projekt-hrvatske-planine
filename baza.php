@@ -1,15 +1,8 @@
 <?php
-
-/* 
-	Poslužitelj se naziva localhost a baza podataka je iwa_2020_vz_projekt. Korisnik za pristup do baze podataka naziva se iwa_2020 a lozinka je foi2020. 
-	Kod izrade projektnog rješenja treba se točno držati uputa i NE SMIJE se mijenjati (naziv poslužitelja, baze podataka, struktura tablica, korisnik i lozinka).
-*/
-
-// Konstante za spajanje na bazu podataka
-define("POSLUZITELJ","localhost"); // adresa servera
-define("BAZA","iwa_2020_vz_projekt"); // naziv sheme
-define("BAZA_KORISNIK","iwa_2020"); // korisničko ime
-define("BAZA_LOZINKA","foi2020"); // lozinka
+define("POSLUZITELJ","localhost");
+define("BAZA","iwa_2020_vz_projekt"); 
+define("BAZA_KORISNIK","iwa_2020"); 
+define("BAZA_LOZINKA","foi2020"); 
 
 function spojiSeNaBazu(){
 	$veza = mysqli_connect(POSLUZITELJ,BAZA_KORISNIK,BAZA_LOZINKA);
@@ -21,7 +14,7 @@ function spojiSeNaBazu(){
 		return False;
 	}
 	
-	mysqli_select_db($veza,BAZA); // odabir SHEME nad kojom ćemo izvoditi operacije
+	mysqli_select_db($veza,BAZA);
 	
 	if(mysqli_error($veza)!==""){
 		echo "GREŠKA: 

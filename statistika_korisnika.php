@@ -1,37 +1,15 @@
 <?php
-
-include_once("baza.php");
-// spajamo se na bazu
-
-/* pokrećemo sesiju funkciom session_start() */
 session_start();
+include_once("baza.php");
 
-// Preusmjeravanje ako korisnik nije moderator ili admin
 if ((isset($_SESSION['id_korisnik']) == false) || ($_SESSION['tip_korisnika'] > 0)) header("Location: index.php");
 
 $ime_korisnika = $_SESSION["ime_korisnika"];
 $id_admina = $_SESSION["id_korisnik"];
 
-/*
-
-ADMIN - popis korisnika
-
-
-Unosi, ažurira i pregledava korisnike sustava te definira i ažurira njihove tipove. 
-
-TIP KORISNIKA
-0 - admin
-1 - moderator
-2 - reg korisnik
-
-*/
-
 $veza = spojiSeNaBazu();
-
 $upit_korisnici = "SELECT korisnik.*, tip_korisnika.naziv FROM korisnik INNER JOIN tip_korisnika ON tip_korisnika.tip_korisnika_id = korisnik.tip_korisnika_id ORDER BY prezime";
 $rezultat_korisnici = izvrsiUpit($veza, $upit_korisnici);
-
-
 ?>
 <!DOCTYPE html>
 <html lang="hr">
@@ -42,21 +20,11 @@ $rezultat_korisnici = izvrsiUpit($veza, $upit_korisnici);
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-
         <?php 
         include_once("navigacija.php");
         ?>
-
         <section id="main">
             <h1>Statistika korisnika</h1>
-
-            <!--<form action="popis_blokiranih_korisnika.php" method="post" style="float: left; margin-right: 20px;">
-                <input type="submit" class="gumb" name="popis-blokiranih" value="Blokirani korisnici">
-            </form>
-            <form action="dodaj_korisnika.php" method="post" >
-                <input type="submit" class="gumb" name="dodaj-korisnika" value="Dodaj novog korisnika">
-            </form> -->
-
             <table style="margin-left: 12%">
                 <thead>
                     <th>Korisničko ime</th>
@@ -66,12 +34,9 @@ $rezultat_korisnici = izvrsiUpit($veza, $upit_korisnici);
                     <th>Tip korisnika</th>
                     <th>Broj javnih slika</th>
                     <th>Broj privatnih slika</th>
-                </thead>
-                                
+                </thead>          
                 <tbody>
-                
-                <?php
-                                
+                <?php          
                 while ($red = mysqli_fetch_array($rezultat_korisnici)){
                     $id_korisnik = $red['korisnik_id'];
                     $kor_ime = $red['korisnicko_ime'];
@@ -102,11 +67,8 @@ $rezultat_korisnici = izvrsiUpit($veza, $upit_korisnici);
                     echo "<td>{$br_privatnih_slika['broj_privatnih']}</td>\n";
                     echo "</tr>\n";
                 }
-                
                 zatvoriVezuNaBazu($veza);
-
                 ?>
-
                 </tbody>
             </table>
         </section>

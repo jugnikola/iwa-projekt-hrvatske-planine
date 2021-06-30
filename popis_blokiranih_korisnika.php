@@ -1,29 +1,11 @@
 <?php
-
-include_once("baza.php");
-// spajamo se na bazu
-
-/* pokrećemo sesiju funkciom session_start() */
 session_start();
+include_once("baza.php");
 
-// Preusmjeravanje ako korisnik nije moderator ili admin
 if ((isset($_SESSION['id_korisnik']) == false) || ($_SESSION['tip_korisnika'] > 0)) header("Location: index.php");
 
 $ime_korisnika = $_SESSION["ime_korisnika"];
 $id_admina = $_SESSION["id_korisnik"];
-
-/*
-
-ADMIN - popis blokiranih korisnika
-
-Administrator vidi popis blokiranih korisnika (blokiran=1) te ih može od blokirati (blokiran=0). 
-
-TIP KORISNIKA
-0 - admin
-1 - moderator
-2 - reg korisnik
-
-*/
 
 $poruka = "";
 
@@ -43,9 +25,7 @@ if (isset($_POST["odblokiraj-korisnika"])) {
     if ($rezultat_odblokiraj) {
         $poruka = "Korisnik odblokiran.";
     }
-
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="hr">
@@ -56,21 +36,11 @@ if (isset($_POST["odblokiraj-korisnika"])) {
         <link rel="stylesheet" type="text/css" href="stil.css">
     </head>
     <body>
-
         <?php 
         include_once("navigacija.php");
         ?>
-
         <section id="main">
             <h1>Popis blokiranih korisnika</h1>
-
-           <!--<form action="popis_blokiranih_korisnika.php" method="post" style="float: left; margin-right: 20px;">
-                <input type="submit" class="gumb" name="popis-blokiranih" value="Blokirani korisnici">
-            </form>
-            <form action="dodaj_korisnika.php" method="post" >
-                <input type="submit" class="gumb" name="dodaj-korisnika" value="Dodaj novog korisnika">
-            </form> -->
-
             <?php
             if ($rezultat_korisnici->num_rows != 0) {
                     echo "
@@ -107,9 +77,7 @@ if (isset($_POST["odblokiraj-korisnika"])) {
                     echo "<td><form method='post' action='{$ime_skripte}'><input type='submit' name='odblokiraj-korisnika' class='gumb' value='Odblokiraj korisnika'><input type='hidden' name='id_korisnik' value='{$id_korisnik}'></form></td>\n";
                     echo "</tr>\n";
                 }
-
                 ?>
-
                 </tbody>
             </table>
             <?= "<p class='uspjeh'>{$poruka}</p>"?>
