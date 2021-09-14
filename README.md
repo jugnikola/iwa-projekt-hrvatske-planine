@@ -4,6 +4,11 @@ Korištene tehnologije: HTML, CSS, PHP, MySQL
 
 ## [Link na aplikaciju](https://iwa.jug.com.hr)
 
+### Korisničko ime i lozinka za prijavu
+Korisnik: `pkos`, `123456`
+Moderator: `kdunst`, `123456`
+Administrator: `admin`, `foi`
+
 ### Zahtjevi projekta
 
 Hrvatske planine
