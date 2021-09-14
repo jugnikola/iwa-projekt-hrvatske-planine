@@ -2,6 +2,8 @@
 ## Projekt iz kolegija Izgradnja web aplikacija
 Korištene tehnologije: HTML, CSS, PHP, MySQL
 
+## [Link na aplikaciju](https://iwa.jug.com.hr)
+
 ### Zahtjevi projekta
 
 Hrvatske planine
@@ -18,5 +20,3 @@ Moderator uz svoje funkcionalnosti ima i sve funkcionalnosti kao i registrirani 
 Administrator uz svoje funkcionalnosti ima i sve funkcionalnosti kao i moderator. Unosi, ažurira i pregledava korisnike sustava te definira i ažurira njihove tipove. Unosi, pregledava i ažurira planine (npr. Dinara, Velebit, ...) te dodjeljuje moderatore za planinu. Jedna planina može imati jednog ili više moderatora, jedan moderator može biti zadužen za više planina. Administrator vidi popis blokiranih korisnika (blokiran=1) te ih može od blokirati (blokiran=0). Administrator vidi statistiku broja privatnih i javih slika po korisniku sortirano prezimenu korisnika.
 
 Napomena: Svi datumi moraju se unositi od strane korisnika i prikazati korisniku u formatu „d.m.Y“, a vrijeme (00:00:00 – 23:59:59) u obliku „H:i:s“ (ne koristiti date i time HTML tip za input element). Format „d.m.Y” predstavlja kod PHP date funkciji i preslikava se na hrvatski format „dd.mm.gggg”. Format „H:i:s” predstavlja kod PHP date funkciji i preslikava se na hrvatski format „hh.mm.ss”. Poslužitelj se naziva localhost a baza podataka je iwa_2020_vz_projekt. Korisnik za pristup do baze podataka naziva se iwa_2020 a lozinka je foi2020. Kod izrade projektnog rješenja treba se točno držati uputa i NE SMIJE se mijenjati (naziv poslužitelja, baze podataka, struktura tablica, korisnik i lozinka). Završeno rješenje projektnog zadatka treba poslati kroz sustav za predaju rješenja nakon čega slijedi obavijest i dogovor o obrani projekta. Obrana projektnog rješenja se obavlja na računalu i bazi podataka nastavnika.
-
-Projekti ne smiju sadržavati u programskom kodu komentare!
