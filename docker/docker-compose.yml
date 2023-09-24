@@ -1,0 +1,29 @@
+version: "0.1"
+
+services:
+  app:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    image: jugnikola/iwa-projekt-hrvatske-planine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./docker/mysql-scripts:/var/mysql-scripts
+      - ../public:/var/www/public
+  db:
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql-config.cnf:/etc/mysql/conf.d/config.cnf
+      - ./docker/mysql-scripts/db-scripts:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: iwa_2020_vz_projekt
+      MYSQL_USER: iwa_2020
+      MYSQL_PASSWORD: foi2020
+
+volumes:
+  mysql-data:

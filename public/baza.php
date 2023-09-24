@@ -1,5 +1,6 @@
 <?php
-define("POSLUZITELJ","localhost");
+//define("POSLUZITELJ","localhost");
+define("POSLUZITELJ","db");
 define("BAZA","iwa_2020_vz_projekt"); 
 define("BAZA_KORISNIK","iwa_2020"); 
 define("BAZA_LOZINKA","foi2020"); 

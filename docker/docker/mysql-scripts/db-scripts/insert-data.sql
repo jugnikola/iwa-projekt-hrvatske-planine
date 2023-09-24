@@ -1,16 +1,10 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 USE `iwa_2020_vz_projekt` ;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 INSERT INTO `tip_korisnika` (`tip_korisnika_id`, `naziv`) VALUES
 (0, 'administrator'),
 (1, 'voditelj'),
 (2, 'korisnik');
-
 
 INSERT INTO `korisnik` (`blokiran`,`korisnik_id`, `tip_korisnika_id`, `korisnicko_ime`, `lozinka`, `ime`, `prezime`, `email`, `slika`) VALUES
 (0,1, 0, 'admin', 'foi', 'Administrator', 'Admin', 'admin@foi.hr', 'korisnici/admin.jpg'),
@@ -115,7 +109,3 @@ INSERT INTO `slika` (`korisnik_id`, `planina_id`, `naziv`, `url`, `opis`, `datum
 (4,2,'Milengrad','https://live.staticflickr.com/65535/48685919028_c4be46ee65_o.jpg','zidine starog Milengrada koji je sagrađen u 13. stoljeću nakon provale Tatara na južnim padinama gore Ivanščice, Budinščina.','2020-10-02 15:00:00',1),
 (4,3,'Medvednica Mountain','https://static.toiimg.com/photo/58851964/.jpg','Medvednica Mountain - Zagreb: Get the Detail of Medvednica Mountain on Times of India Travel','2020-10-02 16:00:00',1),
 (5,1,'Troglav','https://www.total-croatia-cycling.com/media/k2/items/cache/011e88ef4a8328e08be9d913808b8290_XL.jpg','Stigli do vrha','2020-10-02 17:00:00',1);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
